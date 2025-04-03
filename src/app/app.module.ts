@@ -7,7 +7,8 @@ import { HeaderDefaultComponent } from './headers/header-default/header-default.
 import { FooterComponent } from './footer/footer.component';
 import { HeaderHomeComponent } from './headers/header-home/header-home.component';
 import { HomeComponent } from './home/home.component';
-import { ShopComponent } from './shop/shop.component';
+import { LoginComponent } from './login/login.component';
+import { SidemenuComponent } from './sidemenu/sidemenu.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ShopComponent } from './shop/shop.component';
     FooterComponent,
     HeaderHomeComponent,
     HomeComponent,
-    ShopComponent
+    LoginComponent,
+    SidemenuComponent
   ],
   imports: [
     BrowserModule,
