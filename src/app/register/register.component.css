@@ -1,0 +1,33 @@
+.form-row-split {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .form-row-item {
+    flex: 1;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .buttons button {
+    margin-right: 10px;
+  }
+  
+  .login-button {
+    background-color: red;
+    color: white;
+  }
+  
+  .invalid-feedback {
+    color: red;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 10px;
+  }
