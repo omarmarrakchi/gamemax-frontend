@@ -7,8 +7,8 @@ import { HeaderDefaultComponent } from './headers/header-default/header-default.
 import { FooterComponent } from './footer/footer.component';
 import { HeaderHomeComponent } from './headers/header-home/header-home.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { SidemenuComponent } from './sidemenu/sidemenu.component';
+import { LoginComponent } from './user/login/login.component';
+import { SidemenuComponent } from './user/sidemenu/sidemenu.component';
 
 @NgModule({
   declarations: [
