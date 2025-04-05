@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/login/authentification.service';
 import { Router } from '@angular/router';
-import { HttpClient, HttpEventType } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-sidemenu',
@@ -11,17 +11,22 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 export class SidemenuComponent implements OnInit {
   currentUser: any;
   selectedFile: File | null = null;
+  isFileUploaded: boolean = false;
 
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
     private http: HttpClient
   ) {
-    this.authenticationService.currentUser.subscribe((x: any) => this.currentUser = x);
+    this.authenticationService.currentUser.subscribe((x: any) => {
+      this.currentUser = x;
+      this.isFileUploaded = !!this.currentUser.profilePictureUrl;
+    });
   }
 
   ngOnInit() {
     this.currentUser = this.authenticationService.currentUserValue;
+    this.isFileUploaded = !!this.currentUser?.profilePictureUrl;
   }
 
   handleAuthAction() {
@@ -39,6 +44,7 @@ export class SidemenuComponent implements OnInit {
   logout() {
     this.authenticationService.logout();
     this.currentUser = null;
+    this.isFileUploaded = false;
     this.router.navigate(['/login']);
   }
 
@@ -56,20 +62,36 @@ export class SidemenuComponent implements OnInit {
     this.http.post<any>('http://localhost:8080/api/upload', formData, {
       reportProgress: true,
       observe: 'events'
-    }).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress) {
-        console.log('Upload Progress: ' + Math.round(event.loaded / event.total! * 100) + '%');
-      } else if (event.type === HttpEventType.Response) {
-        console.log(event.body);
-        this.currentUser.profilePictureUrl = event.body.fileUrl;
-        this.updateUserProfilePictureUrl(event.body.fileUrl);
+    }).subscribe({
+      next: (event) => {
+        if (event.type === HttpEventType.UploadProgress) {
+          console.log('Upload Progress: ' + Math.round(event.loaded / event.total! * 100) + '%');
+        } else if (event.type === HttpEventType.Response) {
+          console.log('File uploaded URL:', event.body.fileUrl);
+          this.currentUser.profilePictureUrl = event.body.fileUrl;
+          this.updateUserProfilePictureUrl(event.body.fileUrl);
+          this.isFileUploaded = true;
+        }
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Upload failed', error);
       }
     });
   }
 
   updateUserProfilePictureUrl(url: string) {
-    this.authenticationService.updateProfilePictureUrl(url).subscribe(() => {
-      console.log('Profile picture URL updated');
-    });
+    this.http.put<any>('http://localhost:8080/api/updateProfilePicture', { userId: this.currentUser.userId, profilePictureUrl: url })
+      .subscribe({
+        next: (response) => {
+          console.log('Profile picture URL updated', response);
+        },
+        error: (error: HttpErrorResponse) => {
+          console.error('Update failed', error);
+        }
+      });
+  }
+
+  navigateToUserDetails() {
+    this.router.navigate(['/user-details']);
   }
 }

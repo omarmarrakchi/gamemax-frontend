@@ -22,26 +22,25 @@
         <p><strong>First Name:</strong> {{ currentUser.firstName }}</p>
         <p><strong>Last Name:</strong> {{ currentUser.lastName }}</p>
       </div>
-      <input type="file" (change)="onFileSelected($event)">
+      <input type="file" (change)="onFileSelected($event)" *ngIf="!isFileUploaded">
     </div>
   </div>
   <div class="edgtf-side-area-bottom">
     <button class="auth-button" (click)="handleAuthAction()">
       {{ currentUser ? 'Logout' : 'Login' }}
     </button>
-    <div class="widget edgtf-social-icons-group-widget text-align-center">
-      <a class="edgtf-social-icon-widget-holder edgtf-icon-has-hover" style="font-size: 13px; margin: 0 12px" href="https://www.facebook.com/QodeInteractive/" target="_blank">
-        <span class="edgtf-social-icon-widget fab fa-facebook-square"></span>
-      </a>
-      <a class="edgtf-social-icon-widget-holder edgtf-icon-has-hover" style="font-size: 13px; margin: 0 12px" href="https://twitter.com/QodeInteractive" target="_blank">
-        <span class="edgtf-social-icon-widget fab fa-twitter-square"></span>
-      </a>
-      <a class="edgtf-social-icon-widget-holder edgtf-icon-has-hover" style="font-size: 13px; margin: 0 12px" href="https://www.youtube.com/channel/UC-h62vMXD5aZV5zAULD-SuA" target="_blank">
-        <span class="edgtf-social-icon-widget fab fa-youtube"></span>
-      </a>
-      <a class="edgtf-social-icon-widget-holder edgtf-icon-has-hover" style="font-size: 13px; margin: 0 12px" href="https://www.instagram.com/qodeinteractive/" target="_blank">
-        <span class="edgtf-social-icon-widget fab fa-instagram"></span>
-      </a>
-    </div>
+    <a class="edgtf-social-icon-widget-holder edgtf-icon-has-hover" style="font-size: 13px; margin: 0 12px" href="https://www.facebook.com/QodeInteractive/" target="_blank">
+      <span class="edgtf-social-icon-widget fab fa-facebook-square"></span>
+    </a>
+    <a class="edgtf-social-icon-widget-holder edgtf-icon-has-hover" style="font-size: 13px; margin: 0 12px" href="https://twitter.com/QodeInteractive" target="_blank">
+      <span class="edgtf-social-icon-widget fab fa-twitter-square"></span>
+    </a>
+    <a class="edgtf-social-icon-widget-holder edgtf-icon-has-hover" style="font-size: 13px; margin: 0 12px" href="https://www.youtube.com/channel/UC-h62vMXD5aZV5zAULD-SuA" target="_blank">
+      <span class="edgtf-social-icon-widget fab fa-youtube"></span>
+    </a>
+    <a class="edgtf-social-icon-widget-holder edgtf-icon-has-hover" style="font-size: 13px; margin: 0 12px" href="https://www.instagram.com/qodeinteractive/" target="_blank">
+      <span class="edgtf-social-icon-widget fab fa-instagram"></span>
+    </a>
+    <button class="edit-button" (click)="navigateToUserDetails()">Edit User Details</button>
   </div>
 </section>

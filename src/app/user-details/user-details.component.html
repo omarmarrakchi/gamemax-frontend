@@ -1,0 +1,35 @@
+<div class="edgtf-content">
+  <div class="edgtf-content-inner">
+    <div
+      class="edgtf-title-holder edgtf-standard-type edgtf-title-va-header-bottom"
+      style="height: 240px; box-shadow: 15px 15px 21px 0px rgba(1, 1, 1, 0.3); position: relative; overflow: hidden;"
+      data-height="240"
+    >
+      <!-- 🎥 Vidéo de fond -->
+      <video id="bg-video" autoplay muted loop playsinline
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+        <source src="assets/backgroundd.mp4" type="video/mp4" />
+        Ton navigateur ne supporte pas la vidéo HTML5.
+      </video>
+
+      <!-- 🧾 Contenu au-dessus de la vidéo -->
+      <div class="edgtf-title-wrapper" style="height: 240px; position: relative; z-index: 1;">
+        <div class="edgtf-title-inner">
+          <div class="edgtf-grid">
+            <h3 class="edgtf-page-title entry-title">My account</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<div *ngIf="user">
+    <h2>User Details</h2>
+    <p><strong>Full Name:</strong> {{ user.fullName }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <!-- Add more user details as needed -->
+  </div>
+  <div *ngIf="!user">
+    <p>No user details available. Please log in.</p>
+  </div>

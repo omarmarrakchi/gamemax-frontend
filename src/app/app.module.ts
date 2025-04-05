@@ -16,6 +16,9 @@ import { LostpasswordComponent } from './lostpassword/lostpassword.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { RegisterComponent } from './register/register.component';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { AuthGuard } from './services/auth-gard/auth-gard.service';
+import { AuthenticationService } from './services/login/authentification.service';
 
 @NgModule({
   declarations: [
@@ -29,16 +32,18 @@ import { RecaptchaModule } from 'ng-recaptcha';
     LostpasswordComponent,
     
     ResetPasswordComponent,
-          RegisterComponent
+          RegisterComponent,
+          UserDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule ,
     ReactiveFormsModule , 
     HttpClientModule , 
-    RecaptchaModule
+    RecaptchaModule , 
+ 
   ],
-  providers: [],
+  providers: [AuthGuard , AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

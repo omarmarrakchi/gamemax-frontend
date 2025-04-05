@@ -33,6 +33,7 @@ export class AuthenticationService {
         catchError(this.handleError)
       );
   }
+
   register(user: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<any>(`${this.apiUrl}/signup`, user, { headers })
@@ -40,6 +41,14 @@ export class AuthenticationService {
         catchError(this.handleError)
       );
   }
+
+  checkUsername(username: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/check-username?username=${username}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
@@ -66,6 +75,4 @@ export class AuthenticationService {
     }
     return throwError('Something bad happened; please try again later.');
   }
-
-  
 }
