@@ -1,0 +1,128 @@
+<style id='playerx-edge-woo-inline-css' type='text/css'>
+    .page-id-4632 .edgtf-content .edgtf-content-inner > .edgtf-container > .edgtf-container-inner, .page-id-4632 .edgtf-content .edgtf-content-inner > .edgtf-full-width > .edgtf-full-width-inner { padding: 100px 0 23px 0;}@media only screen and (max-width: 1024px) {.page-id-4632 .edgtf-content .edgtf-content-inner > .edgtf-container > .edgtf-container-inner, .page-id-4632 .edgtf-content .edgtf-content-inner > .edgtf-full-width > .edgtf-full-width-inner { padding: 100px 0 23px 0;}}.page-id-4632 .edgtf-content .edgtf-content-inner > .edgtf-container > .edgtf-container-inner, .page-id-4632 .edgtf-content .edgtf-content-inner > .edgtf-full-width > .edgtf-full-width-inner { padding: 100px 0 23px 0;}@media only screen and (max-width: 1024px) {.page-id-4632 .edgtf-content .edgtf-content-inner > .edgtf-container > .edgtf-container-inner, .page-id-4632 .edgtf-content .edgtf-content-inner > .edgtf-full-width > .edgtf-full-width-inner { padding: 100px 0 23px 0;}}
+    </style>
+    <style type="text/css" id="wp-custom-css">
+			@media only screen and (max-width: 1400px) {
+    .edgtf-main-menu>ul>li>a {
+        padding:0 25px !important;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .edgtf-main-menu>ul>li>a {
+        padding:0 20px !important;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .edgtf-main-menu>ul>li>a {
+        padding:0 15px !important;
+    }
+    .edgtf-header-divided .edgtf-page-header .edgtf-vertical-align-containers .edgtf-position-left .edgtf-position-left-inner,
+    .edgtf-header-divided .edgtf-page-header .edgtf-vertical-align-containers .edgtf-position-right .edgtf-position-right-inner {
+        padding: 0 10px !important;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .edgtf-header-divided .edgtf-page-header .edgtf-vertical-align-containers .edgtf-position-left .edgtf-position-left-inner .edgtf-divided-left-inner-top-widget-area {
+        padding:0 !important;
+    }
+}
+
+::-webkit-scrollbar-track {
+    background-color: #fff;
+}
+
+::-webkit-scrollbar {
+    background-color: #fff;
+}		</style>
+
+<div class="edgtf-content" >
+    <div class="edgtf-content-inner">
+<div class="edgtf-title-holder edgtf-centered-type edgtf-title-va-header-bottom edgtf-preload-background edgtf-has-bg-image edgtf-bg-parallax" style="height: 400px;box-shadow: 15px 15px 21px 0px rgba(1, 1, 1, 0.3);background-image:url(../../wp-content/uploads/2018/06/blog-title-img-1-1.jpg);" data-height="400">
+<div class="edgtf-title-image">
+    <img itemprop="image" src="assets/wp-content/uploads/2018/06/blog-title-img-1-1.jpg" alt="a" />
+
+
+</div>
+<div class="edgtf-title-wrapper" style="height: 400px">
+<div class="edgtf-title-inner">
+<div class="edgtf-grid">
+                        <h3 class="edgtf-page-title entry-title" >Posts</h3>
+                                </div>
+</div>
+</div>
+</div>
+
+<div class="edgtf-container">
+    <div class="edgtf-container-inner clearfix">
+<div class="edgtf-grid-row edgtf-grid-normal-gutter">
+<div class="edgtf-page-content-holder edgtf-grid-col-12">
+<div class="edgtf-blog-holder edgtf-blog-standard edgtf-blog-pagination-standard" data-blog-type= standard data-next-page= 2 data-max-num-pages= 3 data-post-number= 5 data-excerpt-length= 53 >
+<div class="edgtf-blog-holder-inner">
+<article id="post-3417" class="edgtf-post-has-media post-3417 post type-post status-publish format-standard has-post-thumbnail hentry category-epic">
+<div class="edgtf-post-content">
+<div class="edgtf-post-heading">
+<div *ngIf="posts.length > 0">
+    <ul>
+      <li *ngFor="let post of posts">
+        <div class="edgtf-post-image">
+          <!-- Vérifiez si l'image existe dans les assets -->
+          <a [routerLink]="['/post', post.postId]" title="{{post.title}}">
+            <img [src]="post.assets && post.assets.length > 0 ? post.assets[0].asset_url : 'default-image.jpg'" [alt]="post.title" />
+          </a>
+        </div>
+  
+        <div class="edgtf-post-text">
+          <div class="edgtf-post-text-inner">
+            <div class="edgtf-post-info-top">
+              <div class="edgtf-post-info-category">
+                <!-- Ajustez le lien en fonction de la catégorie si nécessaire -->
+                <a [routerLink]="['/category', post.communityId]" rel="category tag">{{ post.communityId }}</a>
+              </div>
+            </div>
+            
+            <div class="edgtf-post-text-main">
+              <h4 class="entry-title edgtf-post-title">
+                <a [routerLink]="['/post', post.postId]" title="{{post.title}}">
+                  {{ post.title }}
+                </a>
+              </h4>
+              <div class="edgtf-post-excerpt-holder">
+                <p class="edgtf-post-excerpt">{{ post.content }}</p>
+              </div>
+            </div>
+            
+            <div class="edgtf-post-info-bottom clearfix">
+              <div class="edgtf-post-info-bottom-left">
+                <div class="edgtf-post-info-date entry-date published updated">
+                  <a [routerLink]="['/post', post.postId]">
+                    {{ post.creationDate ? (post.creationDate | date: 'MMMM dd, yyyy') : 'Date not available' }}
+                  </a>
+                </div>
+                <div class="edgtf-post-info-author">
+                  <span class="edgtf-post-info-author-text">by</span>
+                  <a [routerLink]="['/author', post.publisherId]" class="edgtf-post-info-author-link">
+                    {{ post.publisher.name || 'Unknown' }}
+                  </a>
+                </div>
+                <div class="edgtf-post-info-comments-holder">
+                  <a [routerLink]="['/post', post.postId]" class="edgtf-post-info-comments">
+                    <i class="edgtf-icon-font-awesome fa fa-comment"></i>
+                    {{ post.commentCount }}
+                  </a>
+                </div>
+              </div>
+              <div class="edgtf-blog-like">
+                <a href="#" class="edgtf-like" title="Like this" (click)="likePost(post.postId)">
+                  <i class="icon_heart_alt"></i><span>{{ post.reactions ? post.reactions.length : 0 }}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  
