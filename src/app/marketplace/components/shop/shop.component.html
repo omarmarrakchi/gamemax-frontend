@@ -37,7 +37,7 @@
                 <option value="price">Sort by price: low to high</option>
                 <option value="price-desc">Sort by price: high to low</option>
               </select>
-              <input type="hidden" name="paged" value="1" />
+              <input type="hidden" name="paged" value="1"/>
             </form>
             <!-- --------------main content------------------------ -->
             <div class="edgtf-pl-main-holder">
@@ -52,7 +52,7 @@
                       <img
                         width="300"
                         height="300"
-                        src="../wp-content/uploads/2018/06/shop-1-img-6-300x300.jpg"
+                        src="../../../../assets/wp-content/uploads/2018/06/shop-1-img-6-300x300.jpg"
                         class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
                         alt="a"
                         decoding="async"
@@ -80,39 +80,40 @@
                               data-product_sku="016"
                               aria-label="Add &ldquo;Chromacore&rdquo; to your cart"
                               rel="nofollow"
-                              >Add to cart</a
+                            >Add to cart</a
                             >
                           </div>
                         </div>
                       </div>
                     </div>
                     <a
-                      href="../product/chromacore/index.html"
+                      [routerLink]="['/game-detail', article.gameId]"
                       class="woocommerce-LoopProduct-link woocommerce-loop-product__link"
                     ></a>
                   </div>
                   <div class="edgtf-pl-text-wrapper">
                     <h5 class="edgtf-product-list-title">
-                      <a href="../product/chromacore/index.html">{{
-                        article.game.gameName
-                      }}</a>
+                      <a [routerLink]="['/game-detail', article.gameId]">{{
+                          article.game.gameName
+                        }}</a>
                     </h5>
                     <span class="price"
-                      ><span class="woocommerce-Price-amount amount"
-                        ><bdi
-                          >{{ article.price
-                          }}<span class="woocommerce-Price-currencySymbol"
-                            >&#36;</span
-                          ></bdi
-                        ></span
-                      ></span
+                    ><span class="woocommerce-Price-amount amount"
+                    ><bdi
+                    >{{
+                        article.price
+                      }}<span class="woocommerce-Price-currencySymbol"
+                      >&#36;</span
+                      ></bdi
+                    ></span
+                    ></span
                     >
                     <span class="edgtf-pl-category"
-                      ><a
-                        href="../product-category/equipment/index.html"
-                        rel="tag"
-                        >{{article.game.gameType}}</a
-                      ></span
+                    ><a
+                      href="../product-category/equipment/index.html"
+                      rel="tag"
+                    >{{ article.game.gameType }}</a
+                    ></span
                     >
                   </div>
                 </li>
@@ -123,13 +124,13 @@
               <ul class="page-numbers">
                 <li>
                   <span aria-current="page" class="page-numbers current"
-                    >1</span
+                  >1</span
                   >
                 </li>
                 <li><a class="page-numbers" href="page/2/index.html">2</a></li>
                 <li>
                   <a class="next page-numbers" href="page/2/index.html"
-                    >&rarr;</a
+                  >&rarr;</a
                   >
                 </li>
               </ul>
@@ -152,7 +153,7 @@
                     <label
                       for="wc-block-search__input-1"
                       class="wc-block-product-search__label"
-                      >Search</label
+                    >Search</label
                     >
                     <div class="wc-block-product-search__fields">
                       <input
@@ -161,7 +162,8 @@
                         class="wc-block-product-search__field"
                         placeholder="Type Your Search"
                         name="s"
-                      /><button
+                      />
+                      <button
                         type="submit"
                         class="wc-block-product-search__button"
                         aria-label="Search"
@@ -176,10 +178,10 @@
                           height="20"
                           viewBox="0 0 20 20"
                         >
-                          <path d="M6 15l5-5-5-5 1-2 7 7-7 7z" />
+                          <path d="M6 15l5-5-5-5 1-2 7 7-7 7z"/>
                         </svg>
                       </button>
-                      <input type="hidden" name="post_type" value="product" />
+                      <input type="hidden" name="post_type" value="product"/>
                     </div>
                   </form>
                 </div>
@@ -196,7 +198,7 @@
                     <div class="price_slider" style="display: none"></div>
                     <div class="price_slider_amount" data-step="10">
                       <label class="screen-reader-text" for="min_price"
-                        >Min price</label
+                      >Min price</label
                       >
                       <input
                         type="text"
@@ -207,7 +209,7 @@
                         placeholder="Min price"
                       />
                       <label class="screen-reader-text" for="max_price"
-                        >Max price</label
+                      >Max price</label
                       >
                       <input
                         type="text"
@@ -237,7 +239,7 @@
                       <img
                         width="300"
                         height="300"
-                        src="../wp-content/uploads/2018/06/shop-1-img-9-300x300.jpg"
+                        src="../../../../assets/wp-content/uploads/2018/06/shop-1-img-9-300x300.jpg"
                         class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
                         alt="a"
                         decoding="async"
@@ -258,11 +260,11 @@
                     </a>
 
                     <span class="woocommerce-Price-amount amount"
-                      ><bdi
-                        ><span class="woocommerce-Price-currencySymbol"
-                          >&#36;</span
-                        >250</bdi
-                      ></span
+                    ><bdi
+                    ><span class="woocommerce-Price-currencySymbol"
+                    >&#36;</span
+                    >250</bdi
+                    ></span
                     >
                   </li>
                   <li>
@@ -270,7 +272,7 @@
                       <img
                         width="300"
                         height="300"
-                        src="../wp-content/uploads/2018/06/shop-1-img-4-300x300.jpg"
+                        src="../../../../assets/wp-content/uploads/2018/06/shop-1-img-4-300x300.jpg"
                         class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
                         alt="a"
                         decoding="async"
@@ -291,11 +293,11 @@
                     </a>
 
                     <span class="woocommerce-Price-amount amount"
-                      ><bdi
-                        ><span class="woocommerce-Price-currencySymbol"
-                          >&#36;</span
-                        >150</bdi
-                      ></span
+                    ><bdi
+                    ><span class="woocommerce-Price-currencySymbol"
+                    >&#36;</span
+                    >150</bdi
+                    ></span
                     >
                   </li>
                   <li>
@@ -303,7 +305,7 @@
                       <img
                         width="300"
                         height="300"
-                        src="../wp-content/uploads/2018/06/shop-1-img-3-300x300.jpg"
+                        src="../../../../assets/wp-content/uploads/2018/06/shop-1-img-3-300x300.jpg"
                         class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
                         alt="a"
                         decoding="async"
@@ -324,33 +326,33 @@
                     </a>
 
                     <span class="woocommerce-Price-amount amount"
-                      ><bdi
-                        ><span class="woocommerce-Price-currencySymbol"
-                          >&#36;</span
-                        >39</bdi
-                      ></span
+                    ><bdi
+                    ><span class="woocommerce-Price-currencySymbol"
+                    >&#36;</span
+                    >39</bdi
+                    ></span
                     >
                   </li>
                 </ul>
               </div>
               <div class="widget widget_media_image">
                 <a href="http://playerx.edge-themes.com/"
-                  ><img
-                    width="800"
-                    height="520"
-                    src="../wp-content/uploads/2018/06/shop-sidebar-img-1.jpg"
-                    class="image wp-image-217 attachment-full size-full"
-                    alt="a"
-                    style="max-width: 100%; height: auto"
-                    decoding="async"
-                    loading="lazy"
-                    srcset="
+                ><img
+                  width="800"
+                  height="520"
+                  src="../../../../assets/wp-content/uploads/2018/06/shop-sidebar-img-1.jpg"
+                  class="image wp-image-217 attachment-full size-full"
+                  alt="a"
+                  style="max-width: 100%; height: auto"
+                  decoding="async"
+                  loading="lazy"
+                  srcset="
                       https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-sidebar-img-1.jpg         800w,
                       https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-sidebar-img-1-600x390.jpg 600w,
                       https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-sidebar-img-1-300x195.jpg 300w,
                       https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-sidebar-img-1-768x499.jpg 768w
                     "
-                    sizes="auto, (max-width: 800px) 100vw, 800px"
+                  sizes="auto, (max-width: 800px) 100vw, 800px"
                 /></a>
               </div>
               <div class="widget edgtf-title-widget">
@@ -366,53 +368,53 @@
                   >
                     <li class="wc-block-product-categories-list-item">
                       <a href="../product-category/consoles/index.html"
-                        ><span
-                          class="wc-block-product-categories-list-item__name"
-                          >Consoles</span
-                        ></a
+                      ><span
+                        class="wc-block-product-categories-list-item__name"
+                      >Consoles</span
+                      ></a
                       ><span class="wc-block-product-categories-list-item-count"
-                        ><span aria-hidden="true">2</span
-                        ><span class="screen-reader-text"
-                          >2 products</span
-                        ></span
-                      >
+                    ><span aria-hidden="true">2</span
+                    ><span class="screen-reader-text"
+                    >2 products</span
+                    ></span
+                    >
                     </li>
                     <li class="wc-block-product-categories-list-item">
                       <a href="../product-category/controlers/index.html"
-                        ><span
-                          class="wc-block-product-categories-list-item__name"
-                          >Controlers</span
-                        ></a
+                      ><span
+                        class="wc-block-product-categories-list-item__name"
+                      >Controlers</span
+                      ></a
                       ><span class="wc-block-product-categories-list-item-count"
-                        ><span aria-hidden="true">1</span
-                        ><span class="screen-reader-text">1 product</span></span
-                      >
+                    ><span aria-hidden="true">1</span
+                    ><span class="screen-reader-text">1 product</span></span
+                    >
                     </li>
                     <li class="wc-block-product-categories-list-item">
                       <a href="../product-category/equipment/index.html"
-                        ><span
-                          class="wc-block-product-categories-list-item__name"
-                          >Equipment</span
-                        ></a
+                      ><span
+                        class="wc-block-product-categories-list-item__name"
+                      >Equipment</span
+                      ></a
                       ><span class="wc-block-product-categories-list-item-count"
-                        ><span aria-hidden="true">6</span
-                        ><span class="screen-reader-text"
-                          >6 products</span
-                        ></span
-                      >
+                    ><span aria-hidden="true">6</span
+                    ><span class="screen-reader-text"
+                    >6 products</span
+                    ></span
+                    >
                     </li>
                     <li class="wc-block-product-categories-list-item">
                       <a href="../product-category/games/index.html"
-                        ><span
-                          class="wc-block-product-categories-list-item__name"
-                          >Games</span
-                        ></a
+                      ><span
+                        class="wc-block-product-categories-list-item__name"
+                      >Games</span
+                      ></a
                       ><span class="wc-block-product-categories-list-item-count"
-                        ><span aria-hidden="true">6</span
-                        ><span class="screen-reader-text"
-                          >6 products</span
-                        ></span
-                      >
+                    ><span aria-hidden="true">6</span
+                    ><span class="screen-reader-text"
+                    >6 products</span
+                    ></span
+                    >
                     </li>
                   </ul>
                 </div>
