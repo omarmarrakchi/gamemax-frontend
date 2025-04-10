@@ -13,7 +13,6 @@ import {ActivatedRoute} from '@angular/router';
 export class GameDetailComponent implements OnInit {
   article: Article | null = null;
   reviews: Review[] = [];
-  newReview: Review = new Review('', 0);
   reviewForm: FormGroup;
 
 
@@ -101,4 +100,13 @@ export class GameDetailComponent implements OnInit {
       console.error('Formulaire invalide.');
     }
   }
+
+  getAverageRating(): number {
+    if (this.reviews.length === 0) return 0;
+
+    const total = this.reviews.reduce((sum, review) => sum + review.rating, 0);
+    console.log((total / this.reviews.length));
+    return parseFloat((total / this.reviews.length).toFixed(1));
+  }
+
 }

@@ -25,7 +25,7 @@ import { GameDetailComponent } from './marketplace/components/game-detail/game-d
     LoginComponent,
     SidemenuComponent,
     ShopComponent,
-    GameDetailComponent
+    GameDetailComponent,
   ],
   imports: [
     BrowserModule,
