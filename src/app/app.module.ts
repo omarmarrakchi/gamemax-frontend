@@ -12,7 +12,7 @@ import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {  HttpClientModule } from '@angular/common/http';
 import { LostpasswordComponent } from './lostpassword/lostpassword.component';
-
+import { FormsModule } from '@angular/forms';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { RegisterComponent } from './register/register.component';
 import { RecaptchaModule } from 'ng-recaptcha';
@@ -41,6 +41,7 @@ import { AuthenticationService } from './services/login/authentification.service
     ReactiveFormsModule , 
     HttpClientModule , 
     RecaptchaModule , 
+    FormsModule
  
   ],
   providers: [AuthGuard , AuthenticationService],

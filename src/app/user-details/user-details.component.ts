@@ -9,9 +9,29 @@ import { AuthenticationService } from '../services/login/authentification.servic
 export class UserDetailsComponent implements OnInit {
   user: any;
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authenticationService: AuthenticationService) {}
 
-  ngOnInit(): void {
-    this.user = this.authService.currentUserValue;
+  ngOnInit() {
+    this.user = this.authenticationService.currentUserValue;
+    // Combine firstName and lastName to create fullName
+    if (this.user) {
+      this.user.fullName = `${this.user.firstName} ${this.user.lastName}`;
+      this.user.age = this.calculateAge(this.user.birthday);
+    }
+  }
+
+  calculateAge(birthday: string): number {
+    const birthDate = new Date(birthday);
+    const ageDifMs = Date.now() - birthDate.getTime();
+    const ageDate = new Date(ageDifMs); // milliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
+
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      console.log('Selected file:', file.name);
+      // Vous pouvez implémenter le téléchargement du fichier vers le serveur ici
+    }
   }
 }
