@@ -30,4 +30,13 @@ export class ShopService {
     return this.http.post<Review>(`${this.BASE_URL_REVIEW}/${gameId}`, review);
   }
 
+  updateReview(reviewId: number, updatedReview: Review): Observable<Review> {
+    return this.http.put<Review>(`${this.BASE_URL_REVIEW}/${reviewId}`, updatedReview);
+  }
+
+  deleteReview(reviewId: number): Observable<void> {
+    return this.http.delete<void>(`${this.BASE_URL_REVIEW}/${reviewId}`);
+  }
+
+
 }

@@ -21,67 +21,48 @@
     <div class="edgtf-container">
       <div class="edgtf-container-inner clearfix">
         <div class="edgtf-grid-row">
-          <div class="edgtf-page-content-holder edgtf-grid-col-8">
+          <div [ngClass]="{'edgtf-grid-col-push-11': !isGridCol8, 'edgtf-grid-col-8': isGridCol8}"
+               class="edgtf-page-content-holder">
             <div class="woocommerce-notices-wrapper"></div>
             <p class="woocommerce-result-count">
               Showing 1&ndash;12 of 15 results
             </p>
-            <form class="woocommerce-ordering" method="get">
-              <select name="orderby" class="orderby" aria-label="Shop order">
-                <option value="menu_order" selected="selected">
-                  Default sorting
-                </option>
-                <option value="popularity">Sort by popularity</option>
-                <option value="rating">Sort by average rating</option>
-                <option value="date">Sort by latest</option>
-                <option value="price">Sort by price: low to high</option>
-                <option value="price-desc">Sort by price: high to low</option>
-              </select>
-              <input type="hidden" name="paged" value="1"/>
-            </form>
+            <div class="woocommerce-ordering">
+              <button type="submit" class="single_add_to_cart_button button alt"
+                      style="width: 35px; height: 35px; padding: 7px;  top: 8px; border-radius: 5px"
+                      (click)="toggleClass()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-funnel"
+                     viewBox="0 0 16 16">
+                  <path
+                    d="M1.5 1.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.146.354L10 8.207v5.586l-4 2V8.207L1.646 2.854A.5.5 0 0 1 1.5 2.5v-1z"/>
+                </svg>
+              </button>
+            </div>
             <!-- --------------main content------------------------ -->
             <div class="edgtf-pl-main-holder">
               <ul class="products columns-4">
                 <!-- ---------------products---------------------------- -->
                 <li
-                  *ngFor="let article of articles"
+                  *ngFor="let article of filteredArticle"
                   class="product type-product post-346 status-publish first instock product_cat-equipment product_tag-pc product_tag-ps4 product_tag-xbox-one has-post-thumbnail shipping-taxable purchasable product-type-simple"
                 >
                   <div class="edgtf-pl-inner">
                     <div class="edgtf-pl-image">
                       <img
-                        width="300"
-                        height="300"
-                        src="../../../../assets/wp-content/uploads/2018/06/shop-1-img-6-300x300.jpg"
+                        [src]="'http://localhost:8080' + (article?.game?.imageUrls?.[article.game.imageUrls.length - 1])"
                         class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-                        alt="a"
+                        alt="{{ article?.game?.gameName || 'Game Image' }}"
                         decoding="async"
                         fetchpriority="high"
-                        srcset="
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-6-300x300.jpg 300w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-6-100x100.jpg 100w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-6-600x600.jpg 600w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-6-150x150.jpg 150w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-6-768x768.jpg 768w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-6-550x550.jpg 550w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-6-650x650.jpg 650w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-6.jpg         800w
-                        "
-                        sizes="(max-width: 300px) 100vw, 300px"
+                        style="border-radius: 4px"
                       />
                       <div class="edgtf-pl-text">
                         <div class="edgtf-pl-text-outer">
                           <div class="edgtf-pl-text-inner">
                             <a
-                              href="index5035.html?add-to-cart=346"
+                              href="../game-detail/{{article.articleId}}/{{article.gameId}}"
                               data-quantity="1"
-                              class="button product_type_simple add_to_cart_button ajax_add_to_cart"
-                              data-product_id="346"
-                              data-product_sku="016"
-                              aria-label="Add &ldquo;Chromacore&rdquo; to your cart"
-                              rel="nofollow"
-                            >Add to cart</a
-                            >
+                              class="button product_type_simple add_to_cart_button ajax_add_to_cart">View details</a>
                           </div>
                         </div>
                       </div>
@@ -92,29 +73,23 @@
                     ></a>
                   </div>
                   <div class="edgtf-pl-text-wrapper">
-                    <h5 class="edgtf-product-list-title">
-                      <a [routerLink]="['/game-detail', article.gameId]">{{
+                    <p class="edgtf-product-list-title" style="font-size: 18px; font-weight: bold">
+                      <a href="../game-detail/{{article.articleId}}/{{article.gameId}}">{{
                           article.game.gameName
                         }}</a>
-                    </h5>
-                    <span class="price"
+                    </p>
+                    <span class="price" style="font-size: 18px"
                     ><span class="woocommerce-Price-amount amount"
-                    ><bdi
-                    >{{
+                    ><bdi>{{
                         article.price
                       }}<span class="woocommerce-Price-currencySymbol"
-                      >&#36;</span
-                      ></bdi
-                    ></span
-                    ></span
-                    >
-                    <span class="edgtf-pl-category"
-                    ><a
-                      href="../product-category/equipment/index.html"
-                      rel="tag"
-                    >{{ article.game.gameType }}</a
-                    ></span
-                    >
+                      >&#36;</span></bdi></span></span><span class="edgtf-pl-category">
+                      <a
+                        href="../product-category/equipment/index.html"
+                        rel="tag"
+                      >{{ article.game.gameType }}</a
+                      ></span
+                  >
                   </div>
                 </li>
               </ul>
@@ -136,7 +111,9 @@
               </ul>
             </nav>
           </div>
-          <div class="edgtf-sidebar-holder edgtf-grid-col-4">
+
+
+          <div *ngIf="isGridCol8" class="edgtf-sidebar-holder edgtf-grid-col-4">
             <aside class="edgtf-sidebar">
               <div class="widget widget_block">
                 <div
@@ -162,6 +139,7 @@
                         class="wc-block-product-search__field"
                         placeholder="Type Your Search"
                         name="s"
+                        (input)="searchGames($event)"
                       />
                       <button
                         type="submit"
@@ -190,235 +168,86 @@
                 <div class="edgtf-widget-title-holder">
                   <h5 class="edgtf-widget-title">Filter by price</h5>
                 </div>
-                <form
-                  method="get"
-                  action="https://playerx.qodeinteractive.com/elementor/shop/"
-                >
-                  <div class="price_slider_wrapper">
-                    <div class="price_slider" style="display: none"></div>
-                    <div class="price_slider_amount" data-step="10">
-                      <label class="screen-reader-text" for="min_price"
-                      >Min price</label
-                      >
-                      <input
-                        type="text"
-                        id="min_price"
-                        name="min_price"
-                        value="10"
-                        data-min="10"
-                        placeholder="Min price"
-                      />
-                      <label class="screen-reader-text" for="max_price"
-                      >Max price</label
-                      >
-                      <input
-                        type="text"
-                        id="max_price"
-                        name="max_price"
-                        value="800"
-                        data-max="800"
-                        placeholder="Max price"
-                      />
-                      <button type="submit" class="button">Filter</button>
-                      <div class="price_label" style="display: none">
-                        Price: <span class="from"></span> &mdash;
-                        <span class="to"></span>
-                      </div>
-                      <div class="clear"></div>
+
+                <div class="price_slider_wrapper">
+                  <div class="price_slider" style="display: block"></div>
+                  <div class="price_slider_amount" data-step="10">
+                    <label class="screen-reader-text" for="min_price"
+                    >Min price</label
+                    >
+                    <input
+                      type="text"
+                      id="min_price"
+                      name="min_price"
+                      value="10"
+                      data-min="10"
+                      placeholder="Min price"
+                      style="display: none"
+                    />
+                    <label class="screen-reader-text" for="max_price"
+                    >Max price</label
+                    >
+                    <input
+                      type="text"
+                      id="max_price"
+                      name="max_price"
+                      value="120"
+                      data-max="120"
+                      placeholder="Max price"
+                      style="display: none"
+                    />
+                    <button type="submit" class="button">Filter</button>
+                    <div class="price_label" style="display: none">
+                      Price: <span class="from"></span> &mdash;
+                      <span class="to"></span>
                     </div>
+                    <div class="clear"></div>
                   </div>
-                </form>
-              </div>
-              <div class="widget woocommerce widget_products">
-                <div class="edgtf-widget-title-holder">
-                  <h5 class="edgtf-widget-title">Most Popular</h5>
                 </div>
-                <ul class="product_list_widget">
-                  <li>
-                    <a href="../product/vr-hs658/index.html">
-                      <img
-                        width="300"
-                        height="300"
-                        src="../../../../assets/wp-content/uploads/2018/06/shop-1-img-9-300x300.jpg"
-                        class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-                        alt="a"
-                        decoding="async"
-                        loading="lazy"
-                        srcset="
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-9-300x300.jpg 300w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-9-100x100.jpg 100w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-9-600x600.jpg 600w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-9-150x150.jpg 150w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-9-768x768.jpg 768w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-9-550x550.jpg 550w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-9-650x650.jpg 650w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-9.jpg         800w
-                        "
-                        sizes="auto, (max-width: 300px) 100vw, 300px"
-                      />
-                      <span class="product-title">VR HS658</span>
-                    </a>
-
-                    <span class="woocommerce-Price-amount amount"
-                    ><bdi
-                    ><span class="woocommerce-Price-currencySymbol"
-                    >&#36;</span
-                    >250</bdi
-                    ></span
-                    >
-                  </li>
-                  <li>
-                    <a href="../product/farcell/index.html">
-                      <img
-                        width="300"
-                        height="300"
-                        src="../../../../assets/wp-content/uploads/2018/06/shop-1-img-4-300x300.jpg"
-                        class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-                        alt="a"
-                        decoding="async"
-                        loading="lazy"
-                        srcset="
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-4-300x300.jpg 300w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-4-100x100.jpg 100w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-4-600x600.jpg 600w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-4-150x150.jpg 150w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-4-768x768.jpg 768w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-4-550x550.jpg 550w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-4-650x650.jpg 650w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-4.jpg         800w
-                        "
-                        sizes="auto, (max-width: 300px) 100vw, 300px"
-                      />
-                      <span class="product-title">Farcell</span>
-                    </a>
-
-                    <span class="woocommerce-Price-amount amount"
-                    ><bdi
-                    ><span class="woocommerce-Price-currencySymbol"
-                    >&#36;</span
-                    >150</bdi
-                    ></span
-                    >
-                  </li>
-                  <li>
-                    <a href="../product/fireflies/index.html">
-                      <img
-                        width="300"
-                        height="300"
-                        src="../../../../assets/wp-content/uploads/2018/06/shop-1-img-3-300x300.jpg"
-                        class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-                        alt="a"
-                        decoding="async"
-                        loading="lazy"
-                        srcset="
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-3-300x300.jpg 300w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-3-100x100.jpg 100w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-3-600x600.jpg 600w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-3-150x150.jpg 150w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-3-768x768.jpg 768w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-3-550x550.jpg 550w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-3-650x650.jpg 650w,
-                          https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-1-img-3.jpg         800w
-                        "
-                        sizes="auto, (max-width: 300px) 100vw, 300px"
-                      />
-                      <span class="product-title">Fireflies</span>
-                    </a>
-
-                    <span class="woocommerce-Price-amount amount"
-                    ><bdi
-                    ><span class="woocommerce-Price-currencySymbol"
-                    >&#36;</span
-                    >39</bdi
-                    ></span
-                    >
-                  </li>
-                </ul>
               </div>
-              <div class="widget widget_media_image">
-                <a href="http://playerx.edge-themes.com/"
-                ><img
-                  width="800"
-                  height="520"
-                  src="../../../../assets/wp-content/uploads/2018/06/shop-sidebar-img-1.jpg"
-                  class="image wp-image-217 attachment-full size-full"
-                  alt="a"
-                  style="max-width: 100%; height: auto"
-                  decoding="async"
-                  loading="lazy"
-                  srcset="
-                      https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-sidebar-img-1.jpg         800w,
-                      https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-sidebar-img-1-600x390.jpg 600w,
-                      https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-sidebar-img-1-300x195.jpg 300w,
-                      https://playerx.qodeinteractive.com/elementor/wp-content/uploads/2018/06/shop-sidebar-img-1-768x499.jpg 768w
-                    "
-                  sizes="auto, (max-width: 800px) 100vw, 800px"
-                /></a>
-              </div>
+
               <div class="widget edgtf-title-widget">
                 <h5 class="edgtf-widget-title">Categories</h5>
               </div>
+
+
               <div class="widget widget_block">
                 <div
                   data-block-name="woocommerce/product-categories"
                   class="wp-block-woocommerce-product-categories wc-block-product-categories is-list"
                 >
-                  <ul
-                    class="wc-block-product-categories-list wc-block-product-categories-list--depth-0"
-                  >
-                    <li class="wc-block-product-categories-list-item">
-                      <a href="../product-category/consoles/index.html"
-                      ><span
-                        class="wc-block-product-categories-list-item__name"
-                      >Consoles</span
-                      ></a
-                      ><span class="wc-block-product-categories-list-item-count"
-                    ><span aria-hidden="true">2</span
-                    ><span class="screen-reader-text"
-                    >2 products</span
-                    ></span
-                    >
+                  <ul class="wc-block-product-categories-list wc-block-product-categories-list--depth-0" style="cursor: pointer">
+                    <li class="wc-block-product-categories-list-item" (click)="filterByCategory(null)">
+                      <span class="wc-block-product-categories-list-item__name">All</span>
                     </li>
-                    <li class="wc-block-product-categories-list-item">
-                      <a href="../product-category/controlers/index.html"
-                      ><span
-                        class="wc-block-product-categories-list-item__name"
-                      >Controlers</span
-                      ></a
-                      ><span class="wc-block-product-categories-list-item-count"
-                    ><span aria-hidden="true">1</span
-                    ><span class="screen-reader-text">1 product</span></span
-                    >
+                    <li class="wc-block-product-categories-list-item" (click)="filterByCategory('Action')">
+                      <span class="wc-block-product-categories-list-item__name">Action</span>
                     </li>
-                    <li class="wc-block-product-categories-list-item">
-                      <a href="../product-category/equipment/index.html"
-                      ><span
-                        class="wc-block-product-categories-list-item__name"
-                      >Equipment</span
-                      ></a
-                      ><span class="wc-block-product-categories-list-item-count"
-                    ><span aria-hidden="true">6</span
-                    ><span class="screen-reader-text"
-                    >6 products</span
-                    ></span
-                    >
+                    <li class="wc-block-product-categories-list-item" (click)="filterByCategory('Sports')">
+                      <span class="wc-block-product-categories-list-item__name">Sports</span>
                     </li>
-                    <li class="wc-block-product-categories-list-item">
-                      <a href="../product-category/games/index.html"
-                      ><span
-                        class="wc-block-product-categories-list-item__name"
-                      >Games</span
-                      ></a
-                      ><span class="wc-block-product-categories-list-item-count"
-                    ><span aria-hidden="true">6</span
-                    ><span class="screen-reader-text"
-                    >6 products</span
-                    ></span
-                    >
+                    <li class="wc-block-product-categories-list-item" (click)="filterByCategory('Racing')">
+                      <span class="wc-block-product-categories-list-item__name">Racing</span>
+                    </li>
+                    <li class="wc-block-product-categories-list-item" (click)="filterByCategory('Fighting')">
+                      <span class="wc-block-product-categories-list-item__name">Fighting</span>
+                    </li>
+                    <li class="wc-block-product-categories-list-item" (click)="filterByCategory('Horror')">
+                      <span class="wc-block-product-categories-list-item__name">Horror</span>
+                    </li>
+                    <li class="wc-block-product-categories-list-item" (click)="filterByCategory('Adventure')">
+                      <span class="wc-block-product-categories-list-item__name">Adventure</span>
+                    </li>
+                    <li class="wc-block-product-categories-list-item" (click)="filterByCategory('FPS')">
+                      <span class="wc-block-product-categories-list-item__name">FPS</span>
                     </li>
                   </ul>
                 </div>
               </div>
+
+
+
+
             </aside>
           </div>
         </div>

@@ -14,6 +14,8 @@ import { LoginComponent } from './user/login/login.component';
 import { SidemenuComponent } from './user/sidemenu/sidemenu.component';
 import { ShopComponent } from './marketplace/components/shop/shop.component';
 import { GameDetailComponent } from './marketplace/components/game-detail/game-detail.component';
+import { BootstrapCarouselComponent } from './marketplace/components/bootstrap-carousel/bootstrap-carousel.component';
+import { CheckoutComponent } from './marketplace/components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -26,13 +28,15 @@ import { GameDetailComponent } from './marketplace/components/game-detail/game-d
     SidemenuComponent,
     ShopComponent,
     GameDetailComponent,
+    BootstrapCarouselComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

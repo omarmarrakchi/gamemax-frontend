@@ -5,15 +5,16 @@ export class Review {
   reviewText: string;
   rating: number;
   reviewDate: Date;
-  userId: number;
+  idUser: number;
   user: User
+  isEditing : boolean = false;
 
-  constructor(reviewText: string, rating: number, reviewId?: number, user?: User, userId?: number) {
+  constructor(reviewText: string, rating: number, reviewId?: number, user?: User, idUser?: number) {
     this.reviewId = reviewId;
     this.reviewText = reviewText;
     this.rating = rating;
     this.reviewDate = new Date();
-    this.userId = userId || 0;
+    this.idUser = idUser || 1;
     this.user = user || new User(0, '', '', '', '', '', false, '', '');
   }
 }

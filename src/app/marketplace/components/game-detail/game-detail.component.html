@@ -5,16 +5,16 @@
     <div
       class="edgtf-title-holder edgtf-standard-type edgtf-title-va-header-bottom"
       style="
-        height: 150px;
-        background-color: #333133;
-        box-shadow: 15px 15px 21px 0px rgba(1, 1, 1, 0.3);
-      "
+            height: 150px;
+            background-color: #333133;
+            box-shadow: 15px 15px 21px 0px rgba(1, 1, 1, 0.3);
+          "
       data-height="150"
     >
       <div class="edgtf-title-wrapper" style="height: 150px">
         <div class="edgtf-title-inner">
           <div class="edgtf-grid">
-            <h3 class="edgtf-page-title entry-title">Shop</h3>
+            <h4 class="edgtf-page-title entry-title">{{ article?.game?.gameName }}</h4>
           </div>
         </div>
       </div>
@@ -23,15 +23,16 @@
 
     <!--    <div-->
     <!--      class="edgtf-title-holder edgtf-centered-type edgtf-title-va-header-bottom edgtf-preload-background edgtf-has-bg-image edgtf-bg-parallax"-->
-    <!--      style="height: 450px;box-shadow: 15px 15px 21px 0px rgba(1, 1, 1, 0.3);background-image:url(../../../../assets/wp-content/uploads/2018/06/port-title-img-1.jpg);"-->
+    <!--      style="height: 450px; box-shadow: 15px 15px 21px 0px rgba(1, 1, 1, 0.3);"-->
+    <!--      [style.background-image]="'url(' + 'http://localhost:8080' + (article?.game?.imageUrls[0] || '') + ')'"-->
     <!--      data-height="450">-->
     <!--      <div class="edgtf-title-image">-->
-    <!--        <img itemprop="image" src="../../wp-content/uploads/2018/06/port-title-img-1.jpg" alt="a"/>-->
+    <!--        <img itemprop="image" [src]="'http://localhost:8080' + (article?.game?.imageUrls[0] || '')" alt="a"/>-->
     <!--      </div>-->
     <!--      <div class="edgtf-title-wrapper" style="height: 450px">-->
     <!--        <div class="edgtf-title-inner">-->
     <!--          <div class="edgtf-grid">-->
-    <!--            <h3 class="edgtf-page-title entry-title">Standard</h3>-->
+    <!--            <h3 class="edgtf-page-title entry-title"></h3>-->
     <!--          </div>-->
     <!--        </div>-->
     <!--      </div>-->
@@ -51,48 +52,12 @@
               data-columns="4"
               style="opacity: 0; transition: opacity 0.25s ease-in-out"
             >
-              <figure class="woocommerce-product-gallery__wrapper">
 
-
-                <div
-                  data-thumb="../../../../assets/img3.jpg"
-                  data-thumb-alt="a" class="woocommerce-product-gallery__image">
-                  <a href="../../../../assets/img3.jpg">
-                    <img width="600" height="600"
-                         src="../../../../assets/img3.jpg"
-                         class="wp-post-image" alt="a" title="shop-1-img-2" data-caption=""
-                         data-src="../../../../assets/img2.jpg"
-                         data-large_image="../../../../assets/img2.jpg"
-                         data-large_image_width="800"
-                         data-large_image_height="800"
-                         decoding="async"
-                         fetchpriority="high"
-                         srcset="../../../../assets/img3.jpg"
-                         sizes="(max-width: 600px) 100vw, 600px"
-                    /></a>
-                </div>
-
-                <div
-                  data-thumb="../../../../assets/img3.jpg"
-                  data-thumb-alt="a" class="woocommerce-product-gallery__image">
-                  <a href="../../../../assets/img3.jpg">
-                    <img width="600" height="600"
-                         src="../../../../assets/img3.jpg"
-                         class="wp-post-image" alt="a" title="shop-1-img-2" data-caption=""
-                         data-src="../../../../assets/img2.jpg"
-                         data-large_image="../../../../assets/img2.jpg"
-                         data-large_image_width="800"
-                         data-large_image_height="800"
-                         decoding="async"
-                         fetchpriority="high"
-                         srcset="../../../../assets/img3.jpg"
-                         sizes="(max-width: 600px) 100vw, 600px"
-                    /></a>
-                </div>
-
-
-                <span class="edgtf-new-product">New</span>
+              <figure class="woocommerce-product-gallery__wrapper" style="top: 67px">
+                <app-bootstrap-carousel [imageUrls]="article?.game?.imageUrls ?? []"></app-bootstrap-carousel>
               </figure>
+
+
             </div>
             <div class="edgtf-single-product-summary">
               <div class="summary entry-summary">
@@ -108,14 +73,14 @@
                   ></span
                   >
                 </p>
-                <div class="woocommerce-product-details__short-description">
-                  <p>
-                    Donec quam felis, ultricies nec, pellentesque eu, pretium
-                    quis, sem. Nulla consequat massa quis enim. Donec pede
-                    justo, fringilla aliquet nec, vulputate eget, arcu. In enim
-                    justo, rhoncus imperdiet vitae, justo.
-                  </p>
-                </div>
+                <!--                <div class="woocommerce-product-details__short-description">-->
+                <!--                  <p>-->
+                <!--                    Donec quam felis, ultricies nec, pellentesque eu, pretium-->
+                <!--                    quis, sem. Nulla consequat massa quis enim. Donec pede-->
+                <!--                    justo, fringilla aliquet nec, vulputate eget, arcu. In enim-->
+                <!--                    justo, rhoncus imperdiet vitae, justo.-->
+                <!--                  </p>-->
+                <!--                </div>-->
 
                 <form
                   class="cart"
@@ -162,7 +127,7 @@
                 role="tab"
                 aria-controls="tab-description"
               >
-                <a href="#tab-description"> Description </a>
+                <a href="#tab-description" (click)="toggleoffreviews()"> Description </a>
               </li>
               <li
                 class="additional_information_tab"
@@ -170,7 +135,7 @@
                 role="tab"
                 aria-controls="tab-additional_information"
               >
-                <a href="#tab-additional_information">
+                <a (click)="toggleoffreviews()" href="#tab-additional_information">
                   Additional information
                 </a>
               </li>
@@ -290,12 +255,11 @@
                       class="comment even thread-even depth-1"
                       id="li-comment-16"
                     >
-                      <p>Image Path: {{ review.user.profilePictureUrl }}</p>
                       <div id="comment-16" class="comment_container">
                         <img
                           alt=""
-                          [src]="'assets/' + review.user.profilePictureUrl"
-                          [srcset]="'assets/' + review.user.profilePictureUrl"
+                          [src]="review.user.profilePictureUrl"
+                          [srcset]="review.user.profilePictureUrl"
                           class="avatar avatar-60 photo"
                           height="60"
                           width="60"
@@ -306,17 +270,26 @@
                           <!--                          houni-->
 
 
-                          <p class="meta">
-                            <strong class="woocommerce-review__author"
-                            >{{ review.user.username }}
-                            </strong>
-                            <span class="woocommerce-review__dash"
-                            >&ndash;</span
-                            >
-                            <time
-                              class="woocommerce-review__published-date">{{ review.reviewDate | date:'MMMM,d,y hh:mm' }}
-                            </time>
-                          </p>
+                          <div class="meta" style="display: flex; align-items: center; justify-content: space-between;">
+                            <span style="display: flex; align-items: center;">
+                              <strong class="woocommerce-review__author">{{ review.user.username }}</strong>
+                              <span class="woocommerce-review__dash" style="margin: 0 5px;">&ndash;</span>
+                              <time class="woocommerce-review__published-date">{{ review.reviewDate | date:'MMMM,d,y hh:mm' }}</time>
+                            </span>
+                            <div class="custom-select-wrapper">
+                              <select class="action-select" (change)="onSelectChange($event, review)">
+                                <option value="" disabled selected></option>
+                                <option value="update">Update</option>
+                                <option value="delete">Delete</option>
+                              </select>
+                              <span class="custom-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                                  <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                                </svg>
+                              </span>
+                            </div>
+                          </div>
+
 
                           <div class="starse">
                             <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
@@ -325,9 +298,22 @@
                           </div>
 
                           <div class="description">
-                            <p>
+                            <p *ngIf="!review.isEditing">
                               {{ review.reviewText }}
                             </p>
+
+                            <textarea *ngIf="review.isEditing" [(ngModel)]="review.reviewText" rows="5"></textarea>
+                            <p *ngIf="review.isEditing" class="form-submit">
+                              <button
+                                type="submit"
+                                class="submit"
+                                style="padding: 5px; margin-right: 10px; border-radius: 5px"
+                                (click)="updateReview(review)">
+                                Update
+                              </button>
+                              <a style="cursor: pointer" (click)="toggleEdit(review)">Cancel</a>
+                            </p>
+
                           </div>
                         </div>
                       </div>
@@ -392,6 +378,8 @@
                           </small>
                         </div>
                         <textarea id="comment" formControlName="reviewText" cols="45" rows="8"></textarea>
+
+
                         <p class="form-submit">
                           <button type="submit" class="submit">Submit</button>
                         </p>
@@ -456,8 +444,8 @@
 
 
   .star {
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
 
     fill: #ccc;
   }
@@ -477,5 +465,30 @@
   .star-display {
     display: flex;
     align-items: center;
+  }
+
+
+
+  .action-select {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    font-size: 14px;
+    color: #131213;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100px;
+    padding: 5px;
+    text-align: center;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+
+  .custom-select-wrapper {
+    position: relative;
+    display: inline-block;
   }
 </style>

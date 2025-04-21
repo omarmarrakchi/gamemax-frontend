@@ -15,6 +15,6 @@ export class Article {
         this.price = price;
         this.numberOfSold = numberOfSold;
         this.gameId = gameId;
-        this.game = game;
-  }
+  this.game = game;
+}
 }

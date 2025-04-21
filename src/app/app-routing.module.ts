@@ -4,13 +4,15 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './user/login/login.component';
 import { ShopComponent } from './marketplace/components/shop/shop.component';
 import { GameDetailComponent } from './marketplace/components/game-detail/game-detail.component';
+import {CheckoutComponent} from "./marketplace/components/checkout/checkout.component";
 
 const routes: Routes = [
   {path:'' , component:HomeComponent},
   {path : '' , redirectTo : 'HomeComponent' , pathMatch : 'full'},
   {path: 'login', component:LoginComponent},
   {path: 'shop', component:ShopComponent},
-  {path: 'game-detail/:idArticle/:idGame', component:GameDetailComponent}
+  {path: 'game-detail/:idArticle/:idGame', component:GameDetailComponent},
+  {path: 'checkout/:idArticle', component:CheckoutComponent}
 ];
 
 @NgModule({
