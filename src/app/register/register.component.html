@@ -88,6 +88,19 @@
                     <div *ngIf="f['username'].errors['required']">Username is required</div>
                   </div>
                 </div>
+                <div class="woocommerce-form-row form-row form-row-wide" style="margin-top: 10px; margin-bottom: 20px;">
+                  
+                  <button type="button" class="ai-suggest-button" (click)="toggleAiGenerator()">
+                      <span *ngIf="!showAiGenerator">Suggérer un nom avec l'IA</span>
+                      <span *ngIf="showAiGenerator">Cacher le générateur IA</span>
+                  </button>
+              </div>
+              <div *ngIf="showAiGenerator" class="ai-generator-container" style="border: 1px solid #eee; padding: 15px; margin-bottom: 20px; border-radius: 5px;">
+                <app-username-generator
+                   (usernameSelected)="handleUsernameSelectedFromAi($event)">
+                   <!-- (usernameSelected)="registerForm.get('username')?.setValue($event); showAiGenerator = false;" -->
+                </app-username-generator>
+             </div>
                 <div class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide form-row-split">
                   <div class="form-row-item">
                     <label for="age">Age&nbsp;<span class="required">*</span></label>

@@ -80,7 +80,7 @@
                   </button>
                 </div>
                 <div class="woocommerce-LostPassword lost_password">
-                  <a href="lost-password/index.html">Lost your password?</a>
+                  <a [routerLink]="'/lostpassword'">Lost your password?</a>
                 </div>
                 <div *ngIf="error" class="error">
                   {{ error }}

@@ -19,6 +19,8 @@ import { RecaptchaModule } from 'ng-recaptcha';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { AuthGuard } from './services/auth-gard/auth-gard.service';
 import { AuthenticationService } from './services/login/authentification.service';
+import { UsernameGeneratorComponent } from './ai/username-generator/username-generator.component';
+
 
 @NgModule({
   declarations: [
@@ -31,9 +33,11 @@ import { AuthenticationService } from './services/login/authentification.service
     SidemenuComponent,
     LostpasswordComponent,
     
+    
     ResetPasswordComponent,
           RegisterComponent,
-          UserDetailsComponent
+          UserDetailsComponent,
+          UsernameGeneratorComponent
   ],
   imports: [
     BrowserModule,
