@@ -32,5 +32,18 @@ export class AiService {
       );
   }
 
+  suggestSimilarUsernames(existingUsername: string): Observable<string[]> {
+    const requestBody: UsernameDescriptionRequest = { description: existingUsername };
+  
+    return this.http.post<string[]>(`${this.backendUrl}/suggest-similar-username`, requestBody)
+      .pipe(
+        tap(response => {
+            console.log("AiService - Réponse 200 OK reçue du backend (suggestions similaires):", response);
+        }),
+        
+      );
+  }
+  
+
   
 }
