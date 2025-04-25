@@ -13,7 +13,7 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.authenticationService.currentUserValue;
-    // Combine firstName and lastName to create fullName
+   
     if (this.user) {
       this.user.fullName = `${this.user.firstName} ${this.user.lastName}`;
       this.user.age = this.calculateAge(this.user.birthday);
@@ -31,7 +31,7 @@ export class UserDetailsComponent implements OnInit {
     const file: File = event.target.files[0];
     if (file) {
       console.log('Selected file:', file.name);
-      // Vous pouvez implémenter le téléchargement du fichier vers le serveur ici
+      
     }
   }
 }

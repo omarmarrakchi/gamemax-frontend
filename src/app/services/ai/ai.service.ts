@@ -17,12 +17,12 @@ export class AiService {
 
   constructor(private http: HttpClient) { }
 
-  // Changez le type de retour à Observable<string> (une seule chaîne de texte)
+  
   generateUsernames(description: string): Observable<string> {
     const requestBody: UsernameDescriptionRequest = { description: description };
 
-    // Changez le type attendu dans .post à <string> et spécifiez le header Accept
-    return this.http.post(`${this.backendUrl}/generate-usernames`, requestBody, { responseType: 'text' }) // Attendre du texte brut
+   
+    return this.http.post(`${this.backendUrl}/generate-usernames`, requestBody, { responseType: 'text' }) 
       .pipe(
         tap(response => {
             console.log("AiService - Réponse 200 OK reçue du backend (texte brut):", response);
