@@ -1,0 +1,33 @@
+<div class="edgtf-content">
+  <div class="edgtf-content-inner">
+    <div class="edgtf-title-wrapper" style="height: 240px; position: relative; z-index: 1;">
+      <div class="edgtf-title-inner">
+        <!-- You can add a title here if needed -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat toggle button -->
+  <div class="chat-toggle-button" (click)="toggleChat()">
+    💬
+  </div>
+
+  <!-- Chat popup window -->
+  <div class="chat-popup" *ngIf="isChatOpen">
+    <div class="chat-header">
+      <span>SkyCore 🎮️</span>
+      <button (click)="toggleChat()">✖</button>
+    </div>
+
+    <div class="chat-box">
+      <div *ngFor="let message of messages" [ngClass]="{'user-msg': message.sender === 'user', 'bot-msg': message.sender === 'bot'}">
+        <strong>{{ message.sender === 'user' ? 'You' : 'Bot' }}:</strong> {{ message.text }}
+      </div>
+    </div>
+
+    <div class="input-box">
+      <input type="text" [(ngModel)]="userMessage" (keydown.enter)="sendMessage()" placeholder="Type a message..." />
+      <button (click)="sendMessage()">Send</button>
+    </div>
+  </div>
+</div>

@@ -55,8 +55,7 @@
                 <div class="clear"></div>
               </form>
               <div class="woocommerce-notices-wrapper"></div>
-              <form name="checkout" method="post" class="checkout woocommerce-checkout"
-                    action="https://playerx.qodeinteractive.com/elementor/checkout/" enctype="multipart/form-data">
+              <form name="checkout" class="checkout woocommerce-checkout">
 
 
                 <h3 id="order_review_heading">Your game</h3>
@@ -100,8 +99,12 @@
                   </table>
                   <div>
                     <div class="form-row place-order">
-                      <button type="submit" class="button alt" name="woocommerce_checkout_place_order" id="place_order"
-                              value="Place order" data-value="Place order">Paye
+                      <button
+                        type="submit"
+                        name="woocommerce_checkout_place_order"
+                        (click)="pay()"
+                      >
+                        Pay
                       </button>
                     </div>
                   </div>

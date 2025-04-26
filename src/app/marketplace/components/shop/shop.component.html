@@ -25,7 +25,7 @@
                class="edgtf-page-content-holder">
             <div class="woocommerce-notices-wrapper"></div>
             <p class="woocommerce-result-count">
-              Showing 1&ndash;12 of 15 results
+              Showing {{filteredArticle.length}} results
             </p>
             <div class="woocommerce-ordering">
               <button type="submit" class="single_add_to_cart_button button alt"
@@ -49,7 +49,7 @@
                   <div class="edgtf-pl-inner">
                     <div class="edgtf-pl-image">
                       <img
-                        [src]="'http://localhost:8080' + (article?.game?.imageUrls?.[article.game.imageUrls.length - 1])"
+                        [src]="baseUrl + (article?.game?.imageUrls?.[article.game.imageUrls.length - 1])"
                         class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
                         alt="{{ article?.game?.gameName || 'Game Image' }}"
                         decoding="async"
@@ -95,30 +95,16 @@
               </ul>
             </div>
 
-            <nav class="woocommerce-pagination">
-              <ul class="page-numbers">
-                <li>
-                  <span aria-current="page" class="page-numbers current"
-                  >1</span
-                  >
-                </li>
-                <li><a class="page-numbers" href="page/2/index.html">2</a></li>
-                <li>
-                  <a class="next page-numbers" href="page/2/index.html"
-                  >&rarr;</a
-                  >
-                </li>
-              </ul>
-            </nav>
           </div>
 
 
           <div *ngIf="isGridCol8" class="edgtf-sidebar-holder edgtf-grid-col-4">
             <aside class="edgtf-sidebar">
+
               <div class="widget widget_block">
                 <div
                   data-block-name="woocommerce/product-search"
-                  data-placeholder="Type Your Search"
+                  data-placeholder="Search a game"
                   data-form-id="wc-block-product-search-0"
                   class="wc-block-product-search wp-block-woocommerce-product-search"
                 >
@@ -137,7 +123,7 @@
                         type="search"
                         id="wc-block-search__input-1"
                         class="wc-block-product-search__field"
-                        placeholder="Type Your Search"
+                        placeholder="Search game"
                         name="s"
                         (input)="searchGames($event)"
                       />
@@ -164,6 +150,55 @@
                   </form>
                 </div>
               </div>
+
+
+              <div class="widget woocommerce widget_price_filter">
+                <div class="edgtf-widget-title-holder">
+                  <h5 class="edgtf-widget-title">forgot the name ?</h5>
+                </div>
+                <div class="price_slider_wrapper" style="display: flex; flex-direction: column; align-items: flex-end;">
+                  <textarea
+                    placeholder="give me a description"
+                    rows="4"
+                    style="font-size: 14px; width: 100%;"
+                    [(ngModel)]="description"
+                    [readOnly]="isLoading"
+                  >
+                  </textarea>
+
+                  <div style="display: flex; gap: 10px; align-items: center;">
+
+                    <button
+                      *ngIf="!isLoading"
+                      type="submit"
+                      class="button"
+                      style="padding: 5px 20px; font-size: 15px"
+                      (click)="clearDescription()"
+                    >
+                      <i class="fas fa-eraser"></i>
+                      Clear
+                    </button>
+
+
+                    <button
+                      type="submit"
+                      class="button"
+                      style="padding: 5px 20px; font-size: 15px"
+                      (click)="guessGame()"
+                      [disabled]="isLoading"
+                    >
+                      <i *ngIf="!isLoading" class="fas fa-robot" style="margin-right: 1px;"></i>
+                      <i *ngIf="isLoading" class="fas fa-spinner fa-spin" style="margin-right: 1px;"></i>
+                      {{ isLoading ? 'Guessing...' : 'Guess' }}
+                    </button>
+
+
+                  </div>
+
+                </div>
+              </div>
+
+
               <div class="widget woocommerce widget_price_filter">
                 <div class="edgtf-widget-title-holder">
                   <h5 class="edgtf-widget-title">Filter by price</h5>
@@ -216,7 +251,8 @@
                   data-block-name="woocommerce/product-categories"
                   class="wp-block-woocommerce-product-categories wc-block-product-categories is-list"
                 >
-                  <ul class="wc-block-product-categories-list wc-block-product-categories-list--depth-0" style="cursor: pointer">
+                  <ul class="wc-block-product-categories-list wc-block-product-categories-list--depth-0"
+                      style="cursor: pointer">
                     <li class="wc-block-product-categories-list-item" (click)="filterByCategory(null)">
                       <span class="wc-block-product-categories-list-item__name">All</span>
                     </li>
@@ -244,8 +280,6 @@
                   </ul>
                 </div>
               </div>
-
-
 
 
             </aside>

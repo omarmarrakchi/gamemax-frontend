@@ -3,6 +3,7 @@ import {Article} from "../../models/article";
 import {ActivatedRoute} from "@angular/router";
 import {ShopService} from "../../services/shop.service";
 import {Coupon} from "../../models/coupon";
+import {FlouciService} from "../../services/flouci.service";
 
 @Component({
   selector: 'app-checkout',
@@ -26,9 +27,12 @@ export class CheckoutComponent implements OnInit {
   isCouponChecked: boolean = false;
   oldPrice: number = 0;
 
+
+
   constructor(
     private route: ActivatedRoute,
     private shopService: ShopService,
+    private flouciService: FlouciService
   ){}
 
   ngOnInit(): void {
@@ -65,6 +69,27 @@ export class CheckoutComponent implements OnInit {
       },
       error: (err) => {
         console.error('Erreur lors de l\'application du coupon :', err);
+      }
+    });
+  }
+
+  pay(): void {
+    let priceToPay = this.article.price * 1000;
+    this.flouciService.initiatePayment(priceToPay).subscribe({
+      next: (response) => {
+        console.log('Réponse de l\'API Flouci :', response);
+
+        // Vérifiez si la réponse contient un lien de paiement
+        if (response?.result?.link) {
+          // Redirigez l'utilisateur vers le lien de paiement
+          window.location.href = response.result.link;
+        } else {
+          alert('Erreur : Lien de paiement non trouvé dans la réponse.');
+        }
+      },
+      error: (err) => {
+        console.error('Erreur lors de l\'initiation du paiement :', err);
+        alert('Erreur lors de l\'initiation du paiement.');
       }
     });
   }

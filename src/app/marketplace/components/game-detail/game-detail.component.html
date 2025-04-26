@@ -73,14 +73,7 @@
                   ></span
                   >
                 </p>
-                <!--                <div class="woocommerce-product-details__short-description">-->
-                <!--                  <p>-->
-                <!--                    Donec quam felis, ultricies nec, pellentesque eu, pretium-->
-                <!--                    quis, sem. Nulla consequat massa quis enim. Donec pede-->
-                <!--                    justo, fringilla aliquet nec, vulputate eget, arcu. In enim-->
-                <!--                    justo, rhoncus imperdiet vitae, justo.-->
-                <!--                  </p>-->
-                <!--                </div>-->
+
 
                 <form
                   class="cart"
@@ -88,14 +81,13 @@
                   method="post"
                   enctype="multipart/form-data"
                 >
-                  <button
-                    type="submit"
-                    name="add-to-cart"
-                    value="197"
-                    class="single_add_to_cart_button button alt"
-                  >
-                    BUY NOW
-                  </button>
+
+                  <a [routerLink]="['/checkout', article.articleId]">
+                    <button type="submit" value="197" class="single_add_to_cart_button button alt">
+
+                      BUY NOW
+                    </button>
+                  </a>
                 </form>
 
                 <div class="product_meta">
@@ -274,7 +266,8 @@
                             <span style="display: flex; align-items: center;">
                               <strong class="woocommerce-review__author">{{ review.user.username }}</strong>
                               <span class="woocommerce-review__dash" style="margin: 0 5px;">&ndash;</span>
-                              <time class="woocommerce-review__published-date">{{ review.reviewDate | date:'MMMM,d,y hh:mm' }}</time>
+                              <time
+                                class="woocommerce-review__published-date">{{ review.reviewDate | date:'MMMM,d,y hh:mm' }}</time>
                             </span>
                             <div class="custom-select-wrapper">
                               <select class="action-select" (change)="onSelectChange($event, review)">
@@ -283,8 +276,10 @@
                                 <option value="delete">Delete</option>
                               </select>
                               <span class="custom-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
-                                  <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-three-dots" viewBox="0 0 16 16">
+                                  <path
+                                    d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
                                 </svg>
                               </span>
                             </div>
@@ -325,18 +320,18 @@
                 <div id="review_form_wrapper">
                   <div id="review_form">
                     <div id="respond" class="comment-respond">
-                      <span id="reply-title" class="comment-reply-title"
-                      >Add a review
-                        <small
-                        ><a
+                      <span id="reply-title" class="comment-reply-title">Add a review<small>
+                        <a
+
                           rel="nofollow"
                           id="cancel-comment-reply-link"
                           href="index.html#respond"
                           style="display: none"
                         >Cancel reply</a
                         ></small
-                        ></span
+                      ></span
                       >
+                      <h5 *ngIf="!isUplodable" style="color: #ff0e1f">Your review contains inappropriate content and cannot be submitted</h5>
                       <form
                         [formGroup]="reviewForm"
                         (ngSubmit)="onSubmitReview()"
@@ -383,6 +378,7 @@
                         <p class="form-submit">
                           <button type="submit" class="submit">Submit</button>
                         </p>
+
                       </form>
                     </div>
                     <!-- #respond -->
@@ -466,7 +462,6 @@
     display: flex;
     align-items: center;
   }
-
 
 
   .action-select {

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ShopService } from '../../services/shop.service';
 import { Article } from '../../models/article';
+import {DeepSeekServiceService} from "../../services/deep-seek-service.service";
+import { environment } from 'src/app/environments/environment';
 
 declare var $: any;
 
@@ -13,9 +15,14 @@ export class ShopComponent implements OnInit {
   articles: Article[] = [];
   isGridCol8: boolean = false;
   filteredArticle: Article[] = [];
+  description: string = '';
+  gameNames: string[] = [];
+  isLoading: boolean = false;
+  baseUrl: string = environment.apiUrlImg;
 
 
-  constructor(private shopService: ShopService) {}
+
+  constructor(private shopService: ShopService, private deepSeekService: DeepSeekServiceService) {}
 
   ngOnInit(): void {
     this.loadArticles();
@@ -35,6 +42,9 @@ export class ShopComponent implements OnInit {
       next: (data: Article[]) => {
         this.articles = data;
         this.filteredArticle = data;
+        this.gameNames = data.map(article => article.game.gameName);
+        console.log(this.articles);
+
       },
       error: (err) => {
         console.error('Error loading articles:', err);
@@ -113,7 +123,47 @@ export class ShopComponent implements OnInit {
     }
   }
 
+  guessGame(): void {
+    if (!this.description.trim()) {
+      alert('Veuillez entrer une description.');
+      return;
+    }
+    this.isLoading = true;
+    this.deepSeekService.getGameDetails(this.description, this.gameNames).subscribe({
+      next: (result: string) => {
+        this.isLoading = false;
+        this.filteredArticle = [];
+        const listgames = this.parseGameNames(result);
+        console.log('Jeux retournés par l\'API :', listgames);
 
+        this.filteredArticle = this.articles.filter(article =>
+          listgames.some(gameName => article.game.gameName.includes(gameName))
+        );
 
+        console.log('Articles filtrés :', this.filteredArticle);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.error('Erreur lors de la récupération des détails du jeu :', err);
+        alert('Erreur lors de la récupération des détails du jeu.');
+      }
+    });
+  }
+
+  parseGameNames(jsonResult: string): string[] {
+    try {
+      const cleanedJson = jsonResult.replace(/```json|```/g, '').trim();
+      const parsedResult = JSON.parse(cleanedJson);
+      return parsedResult.games.map((game: { name: string }) => game.name);
+    } catch (error) {
+      console.error('Erreur lors du parsing du JSON :', error);
+      return [];
+    }
+  }
+
+  clearDescription(): void {
+    this.description = '';
+    this.filteredArticle = this.articles;
+  }
 
 }

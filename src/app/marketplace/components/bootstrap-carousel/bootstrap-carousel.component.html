@@ -16,7 +16,7 @@
       class="carousel-item"
       [class.active]="i === 0"
     >
-      <img class="d-block w-100" [src]="'http://localhost:8080' + imageUrl" [alt]="'Slide ' + (i + 1)" />
+      <img class="d-block w-100" [src]="baseUrl + imageUrl" [alt]="'Slide ' + (i + 1)" />
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">

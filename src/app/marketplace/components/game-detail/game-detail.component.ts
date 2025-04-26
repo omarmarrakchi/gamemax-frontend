@@ -4,6 +4,7 @@ import {Article} from "../../models/article";
 import {Review} from "../../models/review";
 import {ShopService} from "../../services/shop.service";
 import {ActivatedRoute} from '@angular/router';
+import {EdenaiService} from "../../services/edenai.service";
 
 
 @Component({
@@ -24,12 +25,14 @@ export class GameDetailComponent implements OnInit {
   });
   reviews: Review[] = [];
   reviewForm: FormGroup;
+  isUplodable: boolean = true;
 
 
   constructor(
     private route: ActivatedRoute,
     private shopService: ShopService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private edenaiService: EdenaiService
   ) {
     this.reviewForm = this.fb.group({
       rating: ['', [Validators.required]],
@@ -99,21 +102,37 @@ export class GameDetailComponent implements OnInit {
 
   onSubmitReview(): void {
     if (this.reviewForm.valid) {
-      //const rating = this.reviewForm.get('userId')?.value;
-
       const gameId = this.article?.gameId;
       if (gameId) {
+        const reviewText = this.reviewForm.get('reviewText')?.value;
 
-        this.reviewForm.patchValue({ idUser: 1 });
+        // Appel à la fonction moderateText
+        this.edenaiService.moderateText(reviewText).subscribe({
+          next: (moderationResult) => {
+            console.log('Résultat de la modération :', moderationResult);
 
+            const nsfwScore = moderationResult.openai?.nsfw_likelihood_score;
+            console.log('NSFW Score:', nsfwScore);
+            if (nsfwScore > 0.6) {
+              this.isUplodable = false;
+              this.reviewForm.reset();
+            } else {
 
-        this.shopService.addReview(this.reviewForm.value, gameId).subscribe({
-          next: (review: Review) => {
-            this.reviews.push(review);
-            this.reviewForm.reset();
+              this.reviewForm.patchValue({ idUser: 1 });
+              this.isUplodable = true;
+              this.shopService.addReview(this.reviewForm.value, gameId).subscribe({
+                next: (review: Review) => {
+                  this.reviews.push(review);
+                  this.reviewForm.reset();
+                },
+                error: (err) => {
+                  console.error('Erreur lors de l\'ajout du review :', err);
+                }
+              });
+            }
           },
           error: (err) => {
-            console.error('Erreur lors de l\'ajout du review :', err);
+            console.error('Erreur lors de la modération du texte :', err);
           }
         });
       } else {

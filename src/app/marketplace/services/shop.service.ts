@@ -5,14 +5,20 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import {Coupon} from "../models/coupon";
 
+import { environment} from "../../environments/environment";
+
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
 
-  private readonly BASE_URL_ARTICLE = 'http://localhost:8080/api/articles';
-  private readonly BASE_URL_REVIEW = 'http://localhost:8080/api/games/reviews';
-  private readonly BASE_URL_COUPON = 'http://localhost:8080/api/coupons';
+  // private readonly BASE_URL_ARTICLE = 'http://localhost:8080/api/articles';
+  // private readonly BASE_URL_REVIEW = 'http://localhost:8080/api/games/reviews';
+  // private readonly BASE_URL_COUPON = 'http://localhost:8080/api/coupons';
+
+  private readonly BASE_URL_ARTICLE = `${environment.apiUrl}/articles`;
+  private readonly BASE_URL_REVIEW = `${environment.apiUrl}/games/reviews`;
+  private readonly BASE_URL_COUPON = `${environment.apiUrl}/coupons`;
 
   constructor(private http: HttpClient) { }
 
@@ -43,6 +49,11 @@ export class ShopService {
   checkAndUpdateCoupon(couponCode: string): Observable<Coupon | false> {
     const url = `${this.BASE_URL_COUPON}/check/${couponCode}`;
     return this.http.get<Coupon | false>(url);
+  }
+
+  addUserArticle(userId: number, articleId: number): Observable<any> {
+    const url = `http://localhost:8080/api/articles/${articleId}/user/${userId}`;
+    return this.http.post<any>(url, {});
   }
 
 }
