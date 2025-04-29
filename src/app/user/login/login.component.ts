@@ -1,7 +1,7 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthenticationService } from '../services/login/authentification.service';
+import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '../services/login/authentification.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +26,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   ngAfterViewInit() {
     const video = document.getElementById('bg-video') as HTMLVideoElement;
@@ -37,7 +38,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
   }
 
-  get f() { return this.loginForm.controls; }
+  get f() {
+    return this.loginForm.controls;
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -54,8 +57,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
           this.successMessage = 'Login successful';
           this.loading = false;
           setTimeout(() => {
-            this.router.navigate(['/home']);
-          }, 2000); // Wait for 2 seconds before redirecting
+            this.router.navigateByUrl('/').then(() => {
+              window.location.reload(); // Recharge la page
+            });
+          });
         },
         error => {
           console.error('Login failed', error);

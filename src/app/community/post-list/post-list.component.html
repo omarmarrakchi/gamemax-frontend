@@ -4,13 +4,13 @@
     <div class="edgtf-search-container">
       <div class="edgtf-search-bar">
         <i class="fas fa-search edgtf-search-icon"></i>
-        <input type="text" 
-               [(ngModel)]="searchTerm" 
+        <input type="text"
+               [(ngModel)]="searchTerm"
                (input)="filterPosts()"
                placeholder="         Rechercher des posts..."
                class="edgtf-search-input">
-        <i *ngIf="searchTerm" 
-           class="fas fa-times edgtf-clear-icon" 
+        <i *ngIf="searchTerm"
+           class="fas fa-times edgtf-clear-icon"
            (click)="clearSearch()"></i>
       </div>
     </div>
@@ -19,69 +19,68 @@
     </div>
 
     <!-- Ajouter ce formulaire en overlay à la fin du contenu -->
-<div class="edgtf-post-form-overlay" *ngIf="showPostForm" (click)="showPostForm = false">
-  <div class="edgtf-post-form-container" (click)="$event.stopPropagation()">
-    <button class="edgtf-form-close" (click)="showPostForm = false">&times;</button>
-    
-    <h3 class="edgtf-form-title">Créer un nouveau post</h3>
-    
-    <form (submit)="submitPost()" class="edgtf-post-form">
-      <div class="edgtf-form-group">
-        <input type="text" [(ngModel)]="newPost.title" name="title" 
-               placeholder="Titre du post" required
-               class="edgtf-form-input">
-        <button type="button" 
-                class="edgtf-voice-btn"
-                (click)="startListening('title')">
-          <i class="fas fa-microphone"></i>
-        </button>
-      </div>
-      
-      <div class="edgtf-form-group">
-        <textarea [(ngModel)]="newPost.content" name="content" 
-                  placeholder="Contenu du post..." 
+    <div class="edgtf-post-form-overlay" *ngIf="showPostForm" (click)="showPostForm = false">
+      <div class="edgtf-post-form-container" (click)="$event.stopPropagation()">
+        <button class="edgtf-form-close" (click)="showPostForm = false">&times;</button>
+
+        <h3 class="edgtf-form-title">Créer un nouveau post</h3>
+
+        <form (submit)="submitPost()" class="edgtf-post-form">
+          <div class="edgtf-form-group">
+            <input type="text" [(ngModel)]="newPost.title" name="title"
+                   placeholder="Titre du post" required
+                   class="edgtf-form-input">
+            <button type="button"
+                    class="edgtf-voice-btn"
+                    (click)="startListening('title')">
+              <i class="fas fa-microphone"></i>
+            </button>
+          </div>
+
+          <div class="edgtf-form-group">
+        <textarea [(ngModel)]="newPost.content" name="content"
+                  placeholder="Contenu du post..."
                   rows="5" required
                   class="edgtf-form-textarea"></textarea>
-        <button type="button" 
-                class="edgtf-voice-btn"
-                (click)="startListening('content')">
-          <i class="fas fa-microphone"></i>
-        </button>
+            <button type="button"
+                    class="edgtf-voice-btn"
+                    (click)="startListening('content')">
+              <i class="fas fa-microphone"></i>
+            </button>
+          </div>
+
+          <div class="edgtf-form-group">
+            <label class="edgtf-file-upload">
+              <input type="file" (change)="onFileSelected($event)" accept="image/*">
+              <i class="fas fa-image"></i> Ajouter une image
+            </label>
+
+
+            <!-- Ajouter ce bouton après l'input file -->
+            <button
+              type="button"
+              class="edgtf-extract-btn"
+              (click)="extractTextFromImage()"
+              [disabled]="!selectedFile || isExtracting"
+            >
+              {{ isExtracting ? 'Extraction en cours...' : 'Extraire le texte' }}
+            </button>
+            <div *ngIf="previewImage" class="edgtf-image-preview">
+              <img [src]="previewImage" alt="Preview">
+            </div>
+          </div>
+
+
+          <button type="submit" class="edgtf-form-submit">Publier</button>
+        </form>
       </div>
-
-      <div class="edgtf-form-group">
-        <label class="edgtf-file-upload">
-          <input type="file" (change)="onFileSelected($event)" accept="image/*">
-          <i class="fas fa-image"></i> Ajouter une image
-        </label>
-
-
-         <!-- Ajouter ce bouton après l'input file -->
-  <button 
-    type="button" 
-    class="edgtf-extract-btn"
-    (click)="extractTextFromImage()"
-    [disabled]="!selectedFile || isExtracting"
-  >
-    {{ isExtracting ? 'Extraction en cours...' : 'Extraire le texte' }}
-  </button>
-        <div *ngIf="previewImage" class="edgtf-image-preview">
-          <img [src]="previewImage" alt="Preview">
-        </div>
-      </div>
-
-    
-
-      <button type="submit" class="edgtf-form-submit">Publier</button>
-    </form>
-  </div>
-</div>
+    </div>
     <div
       class="edgtf-title-holder edgtf-centered-type edgtf-title-va-header-bottom edgtf-preload-background edgtf-has-bg-image edgtf-bg-parallax"
       style="height: 400px;box-shadow: 15px 15px 21px 0px rgba(1, 1, 1, 0.3);background-image:url(../../../assets/wp-content/uploads/2018/06/blog-title-img-1-1.jpg);"
       data-height="400">
       <div class="edgtf-title-image">
-        <img itemprop="image" src="../../../assets/wp-content/uploads/2018/06/blog-title-img-1-1.jpg" alt="a" />
+        <img itemprop="image" src="../../../assets/wp-content/uploads/2018/06/blog-title-img-1-1.jpg" alt="a"/>
       </div>
       <div class="edgtf-title-wrapper" style="height: 400px">
         <div class="edgtf-title-inner">
@@ -97,18 +96,18 @@
         <div class="edgtf-grid-row edgtf-grid-normal-gutter">
           <div class="edgtf-page-content-holder edgtf-grid-col-12">
             <div class="edgtf-blog-holder edgtf-blog-standard edgtf-blog-pagination-standard" data-blog-type=standard
-              data-next-page=2 data-max-num-pages=3 data-post-number=5 data-excerpt-length=53>
+                 data-next-page=2 data-max-num-pages=3 data-post-number=5 data-excerpt-length=53>
               <div class="edgtf-blog-holder-inner">
-                <article *ngFor="let post of paginatedPosts" id="post-3417"  
+                <article *ngFor="let post of paginatedPosts" id="post-3417"
 
-                  class="edgtf-post-has-media post-3417 post type-post status-publish format-standard has-post-thumbnail hentry category-epic">
+                         class="edgtf-post-has-media post-3417 post type-post status-publish format-standard has-post-thumbnail hentry category-epic">
                   <div class="edgtf-post-content">
                     <div class="edgtf-post-heading">
 
                       <div class="edgtf-post-image">
                         <a [routerLink]="['/post', post.posId]" [title]="post.title">
                           <img
-                            [src]="post.assets?.length > 0 ? post.assets[0].asset_url : 'assets/default-image.jpg'"
+                            [src]="post.assets?.length > 0 ? baseUrl + post.assets[0].asset_url : 'assets/default-image.jpg'"
                             [alt]="post.title"
                             width="800"
                             height="30"
@@ -130,12 +129,12 @@
 
                           <h4 itemprop="name" class="entry-title edgtf-post-title">
                             <a [routerLink]="['/post', post.postId]" [title]="post.title"
-                            [title]="post.title">
-                              {{post.title}} </a>
+                               [title]="post.title">
+                              {{ post.title }} </a>
                           </h4>
                           <div class="edgtf-post-excerpt-holder">
                             <p itemprop="description" class="edgtf-post-excerpt">
-                              {{post.content}}  
+                              {{ post.content }}
                             </p>
                           </div>
                         </div>
@@ -145,13 +144,13 @@
                               <a itemprop="url" href="../../2021/09/index.html">
 
                                 {{ post.creationDate | date: 'MMMM dd, yyyy' }} </a>
-                              <meta itemprop="interactionCount" content="UserComments: 0" />
+                              <meta itemprop="interactionCount" content="UserComments: 0"/>
                             </div>
                             <div class="edgtf-post-info-author">
                               <span class="edgtf-post-info-author-text">
                                 by </span>
-                                <a [routerLink]="['/post', post.postId]" class="edgtf-post-info-author-link">
-                                {{  post.publisher.firstName || 'Unknown' }} </a>
+                              <a [routerLink]="['/post', post.postId]" class="edgtf-post-info-author-link">
+                                {{ post.publisher.firstName || 'Unknown' }} </a>
                             </div>
                             <div class="edgtf-post-info-comments-holder">
                               <a [routerLink]="['/post', post.postId]">
@@ -159,25 +158,25 @@
                                 {{ post.commentCount || 0 }}
                               </a>
                             </div>
-                          
-<!-- Modifier la section des réactions -->
-<div class="edgtf-reactions-container">
-  <div *ngFor="let type of reactionTypes" 
-       class="edgtf-reaction"
-       [class.active]="userReactions.get(post.postId) === type"
-       (click)="toggleReaction(post, type)">
+
+                            <!-- Modifier la section des réactions -->
+                            <div class="edgtf-reactions-container">
+                              <div *ngFor="let type of reactionTypes"
+                                   class="edgtf-reaction"
+                                   [class.active]="userReactions.get(post.postId) === type"
+                                   (click)="toggleReaction(post, type)">
     <span class="edgtf-reaction-emoji">
       {{ getReactionEmoji(type) }}
     </span>
-    <span class="edgtf-reaction-count">
+                                <span class="edgtf-reaction-count">
       {{ post.reactionSummary?.counts[type] || 0 }}
     </span>
-  </div>
-  <div class="edgtf-total-reactions">
-    Total: {{ post.reactionSummary?.total || 0 }}
-  </div>
-</div>
-                        
+                              </div>
+                              <div class="edgtf-total-reactions">
+                                Total: {{ post.reactionSummary?.total || 0 }}
+                              </div>
+                            </div>
+
 
                           </div>
                           <div class="edgtf-post-info-bottom-right">
@@ -209,16 +208,15 @@
                               </div>
                             </div>
                           </div>
-                          
+
                         </div>
                       </div>
                     </div>
-                    
+
                   </div>
                 </article>
-                
-                
-          
+
+
               </div>
 
               <div class="edgtf-blog-pagination">
@@ -233,7 +231,7 @@
                       <a (click)="goToPage(i + 1)">{{ i + 1 }}</a>
                     </li>
                   </ng-container>
-                  
+
                   <li class="edgtf-pag-next" *ngIf="currentPage < totalPages">
                     <a (click)="goToPage(currentPage + 1)">
                       <span class="arrow_triangle-right">›</span>
@@ -241,7 +239,7 @@
                   </li>
                 </ul>
               </div>
-              
+
 
               <div class="edgtf-blog-pagination-wp">
               </div>

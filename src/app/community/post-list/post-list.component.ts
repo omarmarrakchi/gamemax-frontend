@@ -2,6 +2,7 @@ import { Component ,OnInit } from '@angular/core';
 import { forkJoin, map } from 'rxjs';
 import { PostService} from "../services/community/post.service";
 import { AuthenticationService} from "../../user/services/login/authentification.service";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-post-list',
@@ -20,6 +21,7 @@ currentPage: number = 1;
 paginatedPosts: any[] = [];
 totalPages: number = 0;
 userId :any;
+baseUrl: string = environment.apiUrlImg;
 
 constructor(private postService: PostService, private authService: AuthenticationService) {
   console.log('Constructor - authService.currentUserValue:', this.authService.currentUserValue);

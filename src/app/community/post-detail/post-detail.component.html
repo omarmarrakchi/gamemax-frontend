@@ -9,11 +9,11 @@
 <div class="edgtf-title-wrapper" style="height: 450px">
 <div class="edgtf-title-inner">
   <div class="edgtf-grid">
-  
+
 
     <div class="edgtf-author-info">
-      <img *ngIf="post.publisher.profilePicture" 
-           [src]="post.publisher.profilePicture" 
+      <img *ngIf="post.publisher.profilePicture"
+           [src]="post.publisher.profilePicture"
            class="edgtf-author-image">
       <div class="edgtf-author-details">
         <h3 class="edgtf-page-title entry-title">
@@ -43,7 +43,7 @@
     <div class="edgtf-post-heading">
       <div class="edgtf-post-image">
         <img
-        [src]="post.assets?.length > 0 ? post.assets[0].asset_url : 'assets/default-image.jpg'"
+        [src]="post.assets?.length > 0 ? baseUrl +  post.assets[0].asset_url : 'assets/default-image.jpg'"
         [alt]="post.title"
         width="800"
         height="30"
@@ -52,7 +52,7 @@
         fetchpriority="high"
       />      </div>
     </div>
-  
+
     <div class="edgtf-post-text">
       <div class="edgtf-post-text-inner">
         <div class="edgtf-post-info-top">
@@ -69,10 +69,10 @@
             <a href="#" rel="category tag">{{ post.title }}</a>
           </div>
         </div>
-  
+
         <div class="edgtf-post-text-main">
           <h4 class="entry-title edgtf-post-title">{{ post.title }}</h4>
-  
+
           <div class="elementor-widget-container">
             <p>{{ post.content }}</p>
           </div>
@@ -80,14 +80,14 @@
       </div>
     </div>
   </div>
-  
+
 </article>
 <div class="edgtf-blog-single-navigation">
   <div class="edgtf-blog-single-navigation-inner clearfix">
     <a routerLink="/post" class="edgtf-blog-single-prev">
       <span class="edgtf-blog-single-nav-mark arrow_triangle-left"></span>
       <span class="edgtf-blog-single-nav-label">
-      
+
         <!-- Ou simplement -->
         Retour à la liste
       </span>
@@ -105,7 +105,7 @@
             <strong>{{ comment.author.firstName }}</strong>
             <span>({{ comment.createdAt | date: 'short' }})</span>
       <!-- Modifiez la ligne des actions -->
-      <div *ngIf="authService.currentUserValue?.userId === comment.author.id && !comment.blocked" 
+      <div *ngIf="authService.currentUserValue?.userId === comment.author.id && !comment.blocked"
       class="edgtf-comment-actions">
               <button (click)="toggleEdit(comment)" class="edgtf-edit-btn">
                 <i class="fas fa-edit"></i>
@@ -115,7 +115,7 @@
               </button>
             </div>
           </div>
-          
+
           <div *ngIf="!comment.isEditing; else editForm">
             <div *ngIf="!comment.blocked; else blockedTemplate">
               <p>{{ comment.content }}</p>
@@ -127,7 +127,7 @@
               </div>
             </ng-template>
           </div>
-  
+
           <ng-template #editForm>
             <textarea [(ngModel)]="comment.editedContent" class="edgtf-edit-textarea"></textarea>
             <div class="edgtf-edit-actions">
@@ -153,28 +153,28 @@
       <form (submit)="submitComment()" class="comment-form">
         <div *ngIf="authService.currentUserValue" class="user-info">
           <span class="logged-in-as">
-            Commenter en tant que : 
+            Commenter en tant que :
             <strong>{{ authService.currentUserValue.firstName }} </strong>
           </span>
         </div>
-      
+
         <div *ngIf="!authService.currentUserValue" class="login-warning">
           Connectez-vous pour commenter
         </div>
-      
-        <textarea 
-          [(ngModel)]="newComment.content" 
-          name="comment" 
-          placeholder="Votre commentaire" 
+
+        <textarea
+          [(ngModel)]="newComment.content"
+          name="comment"
+          placeholder="Votre commentaire"
           required
           [disabled]="!authService.currentUserValue">
         </textarea>
-      
+
         <!-- Supprimer le champ de saisie du nom -->
-        
+
         <div class="form-submit">
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             class="submit"
             [disabled]="!authService.currentUserValue">
             Envoyer
@@ -193,8 +193,8 @@
 
 
 
-  
+
   <!-- Ajoute ce script en bas de ta page (juste avant </body>) si ce n’est pas déjà fait -->
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-  
-	
+
+

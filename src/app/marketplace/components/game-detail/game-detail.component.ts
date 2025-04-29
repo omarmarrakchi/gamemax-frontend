@@ -5,6 +5,7 @@ import {Review} from "../../models/review";
 import {ShopService} from "../../services/shop.service";
 import {ActivatedRoute} from '@angular/router';
 import {EdenaiService} from "../../services/edenai.service";
+import {environment} from "../../../environments/environment";
 
 
 @Component({
@@ -27,6 +28,23 @@ export class GameDetailComponent implements OnInit {
   reviewForm: FormGroup;
   isUplodable: boolean = true;
 
+  baseUrl: string = environment.apiUrlImg;
+
+  currentUserId: number | null = (() => {
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const parsedUser = JSON.parse(currentUser);
+      return parsedUser.userId || null;
+    }
+    return null;
+  })();
+
+
+
+
+
+
+
 
   constructor(
     private route: ActivatedRoute,
@@ -37,7 +55,7 @@ export class GameDetailComponent implements OnInit {
     this.reviewForm = this.fb.group({
       rating: ['', [Validators.required]],
       reviewText: ['', [Validators.required, Validators.minLength(5)]],
-      idUser: ['1']
+      idUser: ['']
     });
   }
 
@@ -80,6 +98,7 @@ export class GameDetailComponent implements OnInit {
       this.shopService.getArticleReviews(id).subscribe({
         next: (data: Review[]) => {
           this.reviews = data;
+          console.log(this.reviews);
         },
         error: (err) => {
           console.error('Erreur lors de la récupération des reviews :', err);
@@ -118,7 +137,13 @@ export class GameDetailComponent implements OnInit {
               this.reviewForm.reset();
             } else {
 
-              this.reviewForm.patchValue({ idUser: 1 });
+              const currentUser = localStorage.getItem('currentUser'); // Récupère l'objet currentUser
+              if (currentUser) {
+                const parsedUser = JSON.parse(currentUser); // Parse la chaîne JSON en objet
+                const userId = parsedUser.userId; // Récupère l'userId
+                this.reviewForm.patchValue({ idUser: userId }); // Met à jour le formulaire
+              }
+              console.log('User ID:', this.reviewForm.get('idUser')?.value);
               this.isUplodable = true;
               this.shopService.addReview(this.reviewForm.value, gameId).subscribe({
                 next: (review: Review) => {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/login/authentification.service';
 import { Router } from '@angular/router';
 import { HttpClient, HttpEventType, HttpErrorResponse } from '@angular/common/http';
+import { environment } from 'src/app/environments/environment';
 
 @Component({
   selector: 'app-sidemenu',
@@ -59,7 +60,7 @@ export class SidemenuComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.selectedFile as Blob, this.selectedFile?.name);
 
-    this.http.post<any>('http://localhost:8080/api/upload', formData, {
+    this.http.post<any>(`${environment.apiUrlImg}/api/userupload`, formData, {
       reportProgress: true,
       observe: 'events'
     }).subscribe({

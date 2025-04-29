@@ -30,7 +30,7 @@
             <form *ngIf="showForm" class="reclamation-form" [formGroup]="reclamationForm" (ngSubmit)="save()">
               <div class="form-group">
                 <label>Description</label>
-                <textarea id="description" class="form-control" formControlName="description" placeholder="Décrivez votre réclamation..." rows="3"></textarea>
+                <textarea id="description" class="form-control" formControlName="description" placeholder="Décrivez votre réclamation..." rows="3" (blur)="onDescriptionBlur()"></textarea>
     <div *ngIf="submitted && reclamationForm.get('description')?.errors?.['required']" class="text-danger">
       La description est requise.
     </div>

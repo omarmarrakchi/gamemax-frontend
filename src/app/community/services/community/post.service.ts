@@ -1,7 +1,7 @@
-import { HttpClient,HttpHeaders,HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, catchError, map } from 'rxjs';
-
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable, catchError, map} from 'rxjs';
+import {environment} from "../../../environments/environment";
 
 
 @Injectable({
@@ -9,11 +9,12 @@ import { Observable, catchError, map } from 'rxjs';
 })
 export class PostService {
 
-  private apiUrl = 'http://localhost:8080/api/community/posts';
-  private apiurlComments ='http://localhost:8080/api/community/comments';
-  private apiurlReactions ='http://localhost:8080/api/community/reactions';
+  private readonly apiUrl = `${environment.apiUrl}/community/posts`;
+  private readonly apiurlComments = `${environment.apiUrl}/community/comments`;
+  private readonly apiurlReactions = `${environment.apiUrl}/community/reactions`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
 
   getReactions(postId: number): Observable<{ [key: string]: number }> {
@@ -25,7 +26,7 @@ export class PostService {
     return this.http.post<any>(
       `${this.apiurlReactions}/${postId}?type=${reactionType}`,
       null,
-      { headers }
+      {headers}
     );
   }
 
@@ -36,8 +37,9 @@ export class PostService {
   getReactionSummary(postId: number): Observable<any> {
     return this.http.get<any>(`${this.apiurlReactions}/${postId}/summary`);
   }
+
   updateComment(commentId: number, content: string): Observable<any> {
-    return this.http.put(`${this.apiurlComments}/${commentId}`, { content });
+    return this.http.put(`${this.apiurlComments}/${commentId}`, {content});
   }
 
   deleteComment(commentId: number): Observable<any> {
@@ -47,18 +49,18 @@ export class PostService {
 
   createPost(postData: any, file?: File): Observable<any> {
     console.log('Création du post dans le service - Données:', postData);
-    
+
     const formData = new FormData();
-    const postBlob = new Blob([JSON.stringify(postData)], { type: 'application/json' });
+    const postBlob = new Blob([JSON.stringify(postData)], {type: 'application/json'});
     formData.append('post', postBlob);
-  
+
     if (file) {
       console.log('Fichier joint détecté:', file.name);
       formData.append('file', file);
     }
-  
+
     console.log('FormData préparé:', formData);
-    
+
     return this.http.post(`${this.apiUrl}`, formData);
   }
 
@@ -69,26 +71,25 @@ export class PostService {
   getPostById(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
-    // //  Récupérer les commentaires d’un post
-    // getCommentsByPostId(postId: number): Observable<any> {
-    //   return this.http.get<any>(`${this.apiurlComments}/${postId}`);
-    // }
 
-    getCommentsByPostId(postId: number): Observable<Comment[]> {
-      return this.http.get<Comment[]>(`${this.apiurlComments}/post/${postId}`);
-    }
-    
-  
-    //  Ajouter un commentaire à un post
-    addCommentToPost(postId: number, userId: number, content: string): Observable<any> {
-      const params = new HttpParams()
-        .set('userId', userId.toString())
-        .set('content', content);
-  
-      return this.http.post<any>(`${this.apiurlComments}/add/${postId}`, null, { params });
-    }
+  // //  Récupérer les commentaires d’un post
+  // getCommentsByPostId(postId: number): Observable<any> {
+  //   return this.http.get<any>(`${this.apiurlComments}/${postId}`);
+  // }
+
+  getCommentsByPostId(postId: number): Observable<Comment[]> {
+    return this.http.get<Comment[]>(`${this.apiurlComments}/post/${postId}`);
+  }
 
 
+  //  Ajouter un commentaire à un post
+  addCommentToPost(postId: number, userId: number, content: string): Observable<any> {
+    const params = new HttpParams()
+      .set('userId', userId.toString())
+      .set('content', content);
+
+    return this.http.post<any>(`${this.apiurlComments}/add/${postId}`, null, {params});
+  }
 
 
   uploadImage(file: File): Observable<any> {
@@ -98,30 +99,30 @@ export class PostService {
   }
 
 // post.service.ts
-addReaction(postId: number, reactionType: string): Observable<any> {
-  return this.http.post(`${this.apiurlReactions}/add?postId=${postId}&reactionType=${reactionType}`, {});
-}
+  addReaction(postId: number, reactionType: string): Observable<any> {
+    return this.http.post(`${this.apiurlReactions}/add?postId=${postId}&reactionType=${reactionType}`, {});
+  }
 
-removeReaction(postId: number, reactionType: string): Observable<any> {
-  return this.http.delete(`${this.apiurlReactions}/remove?postId=${postId}&reactionType=${reactionType}`);
-}
+  removeReaction(postId: number, reactionType: string): Observable<any> {
+    return this.http.delete(`${this.apiurlReactions}/remove?postId=${postId}&reactionType=${reactionType}`);
+  }
 
-getUserReactions(userId: number): Observable<any> {
-  return this.http.get(`${this.apiurlReactions}/user/${userId}/reactions`);
-}  
-extractTextFromImage(file: File): Observable<string> {
-  const formData = new FormData();
-  formData.append('file', file);
-  return this.http.post<{text: string}>(`${this.apiUrl}/extract-text`, formData).pipe(
-    map(response => response.text),
-    catchError(err => {
-      throw err.error?.error || 'Erreur inconnue';
-    })
-  );
+  getUserReactions(userId: number): Observable<any> {
+    return this.http.get(`${this.apiurlReactions}/user/${userId}/reactions`);
+  }
+
+  extractTextFromImage(file: File): Observable<string> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<{ text: string }>(`${this.apiUrl}/extract-text`, formData).pipe(
+      map(response => response.text),
+      catchError(err => {
+        throw err.error?.error || 'Erreur inconnue';
+      })
+    );
 
 
-
-}
+  }
 
 
 }

@@ -2,17 +2,27 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from 'src/app/user/services/login/authentification.service';
+import {environment} from "../../environments/environment";
+
+interface PredictionResponse {
+  predictedType: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ReclamationService {
-  private baseUrl = 'http://localhost:8090/api/reclamation';
+  private readonly baseUrl = `${environment.apiUrl}/reclamation`;
 
   constructor(
     private http: HttpClient,
     private authService: AuthenticationService
   ) {}
+  predictType(description: string): Observable<PredictionResponse> {
+    const payload = { description: description };
+    return this.http.post<PredictionResponse>(`${this.baseUrl}/predict-type`, payload);
+  }
 
   addRec( rec: any): Observable<any> {
     const userId = this.authService.currentUserValue?.userId;

@@ -270,7 +270,7 @@
                                 class="woocommerce-review__published-date">{{ review.reviewDate | date:'MMMM,d,y hh:mm' }}</time>
                             </span>
                             <div class="custom-select-wrapper">
-                              <select class="action-select" (change)="onSelectChange($event, review)">
+                              <select *ngIf="review.user.userId == currentUserId" class="action-select" (change)="onSelectChange($event, review)">
                                 <option value="" disabled selected></option>
                                 <option value="update">Update</option>
                                 <option value="delete">Delete</option>

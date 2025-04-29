@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { environment } from 'src/app/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private apiUrl = 'http://localhost:8080/api/auth';
+  private apiUrl = `${environment.apiUrlImg}/api/auth`;
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
