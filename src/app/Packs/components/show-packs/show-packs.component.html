@@ -38,19 +38,28 @@
                                 <div class="elementor-widget-container">
                                   <div class="edgtf-tabs tabs-without-padding edgtf-tabs-standard ">
                                     <ul class="edgtf-tabs-nav clearfix">
-                                      <li *ngFor="let cat of categories" (click)="filterPacks(cat)" [class.active]="selectedCategory === cat">
+                                      <li
+                                        *ngFor="let cat of categories"
+                                        class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"
+                                        [class.ui-tabs-active]="selectedCategory === cat"
+                                        [class.ui-state-active]="selectedCategory === cat"
+                                        [class.active]="selectedCategory === cat"
+                                        (click)="filterPacks(cat)">
+
+
                                         <a href="javascript:void(0)">{{ cat }}</a>
                                       </li>
                                     </ul>
 
                                     <div class="edgtf-tab-container" id="tab-all-matches-320"><p><div class="edgtf-match-list-holder-outer">
                                       <div class="edgtf-match-list-holder edgtf-match-skin-dark" data-next-page= 2 data-order-by= menu_order data-order= ASC data-number= -1 data-title-tag= h5 data-team-title-tag= h6 data-show-categories= yes data-show-date= yes data-skin= dark data-show-result= yes data-show-load-more= no  data-max-num-pages = 0>
-                                      <article class="edgtf-match-status-finished" *ngFor="let pack of packs">
+                                      <article class="edgtf-match-status-finished" *ngFor="let pack of packs"  >
+
                                       <div class="edgtf-match-item-holder">
-                                        <a class="edgtf-match-link" href="../match-item/nay-corral-gundown/index.html" ></a>
+                                        <a class="edgtf-match-link" href="/singlePack/{{pack.packId}}" ></a>
                                         <div class="edgtf-match-single-team">
                                           <div class="edgtf-match-item-image-holder">
-                                            <img decoding="async" src="http://localhost:8094{{pack.image.imageUrl}}" alt="Hacksaw"/>
+                                            <img decoding="async" [src]="baseUrl + '/api'+pack.image.imageUrl"  alt="Hacksaw"/>
                                           </div>
 
                                           <div class="edgtf-match-item-text-holder">
@@ -64,11 +73,11 @@
                                           <h5 class="edgtf-match-title">
                                             {{pack.packName}}    </h5>
                                           <div class="edgtf-match-date">
-                                            <span class="edgtf-match-date"> {{pack.availableDate}}</span>		    </div>
+                                            <span class="edgtf-match-date"> {{pack.availableDate | date:'longDate' }}  </span>		    </div>
 
                                         </div>
                                         <div class="edgtf-match-result-holder">
-                                          <span class="edgtf-match-info-status">11</span>
+                                          <span class="edgtf-match-info-status">{{ pack.packGames?.length }}</span>
                                         </div>
                                       </div>
                                     </article>

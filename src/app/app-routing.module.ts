@@ -23,6 +23,8 @@ import {SubscriptionComponent} from "./Subscriptions/components/subscription/sub
 import {ShowPacksComponent} from "./Packs/components/show-packs/show-packs.component";
 import {SinglePackComponent} from "./Packs/components/single-pack/single-pack.component";
 import {PaymentSubComponent} from "./Subscriptions/components/payment-sub/payment-sub.component";
+import {SingleGameComponent} from "./Packs/components/single-game/single-game.component";
+import {GameLobyComponent} from "./cloudGaming/game-loby/game-loby.component";
 
 const routes: Routes = [
   {path:'' , component:HomeComponent},
@@ -51,9 +53,13 @@ const routes: Routes = [
   {path: 'support/technical', component: ReclamationComponent},
 
   {path: 'subscription', component: SubscriptionComponent},
-  {path: 'showPacks', component: ShowPacksComponent},
-  {path: 'singlePack', component: SinglePackComponent},
-  {path: 'payment', component: PaymentSubComponent}
+  {path: 'payment', component: PaymentSubComponent},
+  {path:'showPacks' , component:ShowPacksComponent},
+  {path:'singlePack/:idPack' , component:SinglePackComponent},
+  {path:'payment' , component:PaymentSubComponent},
+  {path:'singleGame/:idGame' , component:SingleGameComponent},
+
+  {path:'lobyGame' , component:GameLobyComponent},
 ];
 
 @NgModule({

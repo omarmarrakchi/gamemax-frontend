@@ -28,6 +28,8 @@ export class GameDetailComponent implements OnInit {
   reviewForm: FormGroup;
   isUplodable: boolean = true;
 
+  isBuyed: boolean = false;
+
   baseUrl: string = environment.apiUrlImg;
 
   currentUserId: number | null = (() => {
@@ -38,13 +40,6 @@ export class GameDetailComponent implements OnInit {
     }
     return null;
   })();
-
-
-
-
-
-
-
 
   constructor(
     private route: ActivatedRoute,
@@ -73,6 +68,24 @@ export class GameDetailComponent implements OnInit {
     });
     this.loadArticle();
     this.loadReviews();
+
+
+    const userId = this.currentUserId;
+    const gameId = Number(this.route.snapshot.paramMap.get('idArticle'));
+
+    if (userId && gameId) {
+      this.shopService.existsByUserIdAndGameId(userId, gameId).subscribe({
+        next: (exists: boolean) => {
+          this.isBuyed = exists;
+        },
+        error: (err) => {
+          console.error('Erreur lors de la vérification de l\'achat :', err);
+        }
+      });
+    }
+
+    console.log(this.isBuyed);
+
   }
 
   private loadArticle(): void {
@@ -98,11 +111,11 @@ export class GameDetailComponent implements OnInit {
       this.shopService.getArticleReviews(id).subscribe({
         next: (data: Review[]) => {
           this.reviews = data;
-          console.log(this.reviews);
         },
         error: (err) => {
           console.error('Erreur lors de la récupération des reviews :', err);
         }
+
       });
     } else {
       console.error('ID invalide ou manquant dans l\'URL.');
@@ -141,7 +154,7 @@ export class GameDetailComponent implements OnInit {
               if (currentUser) {
                 const parsedUser = JSON.parse(currentUser); // Parse la chaîne JSON en objet
                 const userId = parsedUser.userId; // Récupère l'userId
-                this.reviewForm.patchValue({ idUser: userId }); // Met à jour le formulaire
+                this.reviewForm.patchValue({idUser: userId}); // Met à jour le formulaire
               }
               console.log('User ID:', this.reviewForm.get('idUser')?.value);
               this.isUplodable = true;

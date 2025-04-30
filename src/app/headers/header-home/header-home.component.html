@@ -17,7 +17,7 @@
     >
       <polygon
         fill="#ffffff"
-        points="23.923,20.992 14.889,11.958 23.915,2.932 20.984,0.001 11.958,9.027 2.938,0.006 0.006,2.938 
+        points="23.923,20.992 14.889,11.958 23.915,2.932 20.984,0.001 11.958,9.027 2.938,0.006 0.006,2.938
 	9.026,11.958 0,20.984 2.932,23.916 11.958,14.89 20.992,23.923 "
       />
     </svg>
@@ -275,307 +275,44 @@
                 id="nav-menu-item-3088"
                 class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children has_sub narrow"
               >
-                <a href="#" class=""
-                  ><span class="item_outer"
-                    ><span class="item_text">Pages</span
-                    ><i class="edgtf-menu-arrow fa fa-angle-down"></i></span
-                ></a>
-                <div class="second">
-                  <div class="inner">
-                    <ul>
-                      <li
-                        id="nav-menu-item-4277"
-                        class="menu-item menu-item-type-post_type menu-item-object-page"
-                      >
-                        <a href="about-the-clan/index.html" class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">About The Clan</span></span
-                          ></a
-                        >
-                      </li>
-                      <li
-                        id="nav-menu-item-4331"
-                        class="menu-item menu-item-type-post_type menu-item-object-page"
-                      >
-                        <a href="about-me/index.html" class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">About Me</span></span
-                          ></a
-                        >
-                      </li>
-                      <li
-                        id="nav-menu-item-4527"
-                        class="menu-item menu-item-type-post_type menu-item-object-page"
-                      >
-                        <a href="our-squad/index.html" class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">Our Squad</span></span
-                          ></a
-                        >
-                      </li>
-                      <li
-                        id="nav-menu-item-4528"
-                        class="menu-item menu-item-type-post_type menu-item-object-match-item"
-                      >
-                        <a
-                          href="match-item/nay-corral-gundown/index.html"
-                          class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">Match Single</span></span
-                          ></a
-                        >
-                      </li>
-                      <li
-                        id="nav-menu-item-4543"
-                        class="menu-item menu-item-type-post_type menu-item-object-page"
-                      >
-                        <a href="faq-page/index.html" class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">FAQ Page</span></span
-                          ></a
-                        >
-                      </li>
-                      <li
-                        id="nav-menu-item-3166"
-                        class="menu-item menu-item-type-post_type menu-item-object-page"
-                      >
-                        <a href="contact-us/index.html" class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">Contact Us</span></span
-                          ></a
-                        >
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                <a [routerLink]="['/user-details']" class="nav-link">
+        <span class="item_outer">
+          <span class="item_text">My Account</span>
+          <i class="edgtf-menu-arrow fa fa-angle-down"></i>
+        </span>
+                </a>
               </li>
               <li
                 id="nav-menu-item-3089"
                 class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children has_sub narrow"
               >
-                <a href="#" class=""
-                  ><span class="item_outer"
-                    ><span class="item_text">Portfolio</span
-                    ><i class="edgtf-menu-arrow fa fa-angle-down"></i></span
-                ></a>
+                <a [routerLink]="['/post']" class="nav-link">
+        <span class="item_outer">
+          <span class="item_text">Blog</span>
+          <i class="edgtf-menu-arrow fa fa-angle-down"></i>
+        </span>
+                </a>
                 <div class="second">
                   <div class="inner">
                     <ul>
                       <li
-                        id="nav-menu-item-4551"
-                        class="menu-item menu-item-type-post_type menu-item-object-page"
+                        routerLinkActive="current-menu-item current_page_item"
+                        [routerLinkActiveOptions]="{ exact: true }"
                       >
-                        <a href="portfolio/standard/index.html" class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">Standard</span></span
-                          ></a
-                        >
+                        <a [routerLink]="['/post']" class="nav-link">
+                          <span class="item_outer"><span class="item_text">All Blogs</span></span>
+                        </a>
                       </li>
                       <li
-                        id="nav-menu-item-4558"
-                        class="menu-item menu-item-type-post_type menu-item-object-page"
+                        routerLinkActive="current-menu-item current_page_item"
+                        [routerLinkActiveOptions]="{ exact: true }"
                       >
-                        <a href="portfolio/gallery/index.html" class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">Gallery</span></span
-                          ></a
-                        >
-                      </li>
-                      <li
-                        id="nav-menu-item-4569"
-                        class="menu-item menu-item-type-post_type menu-item-object-page"
-                      >
-                        <a href="portfolio/masonry/index.html" class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">Masonry</span></span
-                          ></a
-                        >
-                      </li>
-                      <li
-                        id="nav-menu-item-3108"
-                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children sub"
-                      >
-                        <a href="#" class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">Layouts</span></span
-                          ></a
-                        >
-                        <ul>
-                          <li
-                            id="nav-menu-item-4579"
-                            class="menu-item menu-item-type-post_type menu-item-object-page"
-                          >
-                            <a href="portfolio/two-columns/index.html" class=""
-                              ><span class="item_outer"
-                                ><span class="item_text"
-                                  >Two Columns</span
-                                ></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-4588"
-                            class="menu-item menu-item-type-post_type menu-item-object-page"
-                          >
-                            <a
-                              href="portfolio/three-columns/index.html"
-                              class=""
-                              ><span class="item_outer"
-                                ><span class="item_text"
-                                  >Three Columns</span
-                                ></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-4595"
-                            class="menu-item menu-item-type-post_type menu-item-object-page"
-                          >
-                            <a
-                              href="portfolio/three-columns-wide/index.html"
-                              class=""
-                              ><span class="item_outer"
-                                ><span class="item_text"
-                                  >Three Columns Wide</span
-                                ></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-4621"
-                            class="menu-item menu-item-type-post_type menu-item-object-page"
-                          >
-                            <a href="portfolio/four-columns/index.html" class=""
-                              ><span class="item_outer"
-                                ><span class="item_text"
-                                  >Four Columns</span
-                                ></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-4620"
-                            class="menu-item menu-item-type-post_type menu-item-object-page"
-                          >
-                            <a
-                              href="portfolio/four-columns-wide/index.html"
-                              class=""
-                              ><span class="item_outer"
-                                ><span class="item_text"
-                                  >Four Columns Wide</span
-                                ></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-4619"
-                            class="menu-item menu-item-type-post_type menu-item-object-page"
-                          >
-                            <a
-                              href="portfolio/five-columns-wide/index.html"
-                              class=""
-                              ><span class="item_outer"
-                                ><span class="item_text"
-                                  >Five Columns Wide</span
-                                ></span
-                              ></a
-                            >
-                          </li>
-                        </ul>
-                      </li>
-                      <li
-                        id="nav-menu-item-3109"
-                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children sub"
-                      >
-                        <a href="#" class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">Single</span></span
-                          ></a
-                        >
-                        <ul>
-                          <li
-                            id="nav-menu-item-3255"
-                            class="menu-item menu-item-type-post_type menu-item-object-portfolio-item"
-                          >
-                            <a
-                              href="portfolio-item/falls-barrow/index.html"
-                              class=""
-                              ><span class="item_outer"
-                                ><span class="item_text"
-                                  >Small Images</span
-                                ></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-3253"
-                            class="menu-item menu-item-type-post_type menu-item-object-portfolio-item"
-                          >
-                            <a
-                              href="portfolio-item/the-dark-blade/index.html"
-                              class=""
-                              ><span class="item_outer"
-                                ><span class="item_text"
-                                  >Small Slider</span
-                                ></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-3256"
-                            class="menu-item menu-item-type-post_type menu-item-object-portfolio-item"
-                          >
-                            <a
-                              href="portfolio-item/before-the-storm/index.html"
-                              class=""
-                              ><span class="item_outer"
-                                ><span class="item_text">Big Images</span></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-3254"
-                            class="menu-item menu-item-type-post_type menu-item-object-portfolio-item"
-                          >
-                            <a
-                              href="portfolio-item/dragon-rising/index.html"
-                              class=""
-                              ><span class="item_outer"
-                                ><span class="item_text">Big Slider</span></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-3251"
-                            class="menu-item menu-item-type-post_type menu-item-object-portfolio-item"
-                          >
-                            <a
-                              href="portfolio-item/the-eye-of-magnus/index.html"
-                              class=""
-                              ><span class="item_outer"
-                                ><span class="item_text"
-                                  >Small Gallery</span
-                                ></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-3252"
-                            class="menu-item menu-item-type-post_type menu-item-object-portfolio-item"
-                          >
-                            <a
-                              href="portfolio-item/moon-eclipse/index.html"
-                              class=""
-                              ><span class="item_outer"
-                                ><span class="item_text"
-                                  >Big Gallery</span
-                                ></span
-                              ></a
-                            >
-                          </li>
-                        </ul>
+                        <a [routerLink]="['/add-post']" class="nav-link">
+                          <span class="item_outer"><span class="item_text">Add Blog</span></span>
+                        </a>
                       </li>
                     </ul>
+
                   </div>
                 </div>
               </li>
@@ -648,265 +385,58 @@
                 id="nav-menu-item-3090"
                 class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children has_sub narrow"
               >
-                <a href="#" class=""
-                  ><span class="item_outer"
-                    ><span class="item_text">Blog</span
-                    ><i class="edgtf-menu-arrow fa fa-angle-down"></i></span
-                ></a>
+                <a [routerLink]="['/subscription']" class="nav-link">
+        <span class="item_outer">
+          <span class="item_text">Packs</span>
+          <i class="edgtf-menu-arrow fa fa-angle-down"></i>
+        </span>
+                </a>
                 <div class="second">
                   <div class="inner">
                     <ul>
                       <li
-                        id="nav-menu-item-4625"
-                        class="menu-item menu-item-type-post_type menu-item-object-page"
+                        routerLinkActive="current-menu-item current_page_item"
+                        [routerLinkActiveOptions]="{ exact: true }"
                       >
-                        <a href="blog/right-sidebar/index.html" class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">Right Sidebar</span></span
-                          ></a
-                        >
+                        <a [routerLink]="['/subscription']" class="nav-link">
+                          <span class="item_outer"><span class="item_text">Subscription</span></span>
+                        </a>
                       </li>
                       <li
-                        id="nav-menu-item-5121"
-                        class="menu-item menu-item-type-post_type menu-item-object-page"
+                        routerLinkActive="current-menu-item current_page_item"
+                        [routerLinkActiveOptions]="{ exact: true }"
                       >
-                        <a href="blog/left-sidebar/index.html" class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">Left Sidebar</span></span
-                          ></a
-                        >
-                      </li>
-                      <li
-                        id="nav-menu-item-5122"
-                        class="menu-item menu-item-type-post_type menu-item-object-page"
-                      >
-                        <a href="blog/no-sidebar/index.html" class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">No Sidebar</span></span
-                          ></a
-                        >
-                      </li>
-                      <li
-                        id="nav-menu-item-3093"
-                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children sub"
-                      >
-                        <a href="#" class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">Post Types</span></span
-                          ></a
-                        >
-                        <ul>
-                          <li
-                            id="nav-menu-item-5123"
-                            class="menu-item menu-item-type-post_type menu-item-object-post"
-                          >
-                            <a
-                              href="2021/09/14/white-keep-assault/index.html"
-                              class=""
-                              ><span class="item_outer"
-                                ><span class="item_text">Standard</span></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-5124"
-                            class="menu-item menu-item-type-post_type menu-item-object-post"
-                          >
-                            <a
-                              href="2021/09/14/dota-2-tournament/index.html"
-                              class=""
-                              ><span class="item_outer"
-                                ><span class="item_text">Gallery</span></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-5125"
-                            class="menu-item menu-item-type-post_type menu-item-object-post"
-                          >
-                            <a
-                              href="2021/09/14/black-angels/index.html"
-                              class=""
-                              ><span class="item_outer"
-                                ><span class="item_text">Link</span></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-5126"
-                            class="menu-item menu-item-type-post_type menu-item-object-post"
-                          >
-                            <a
-                              href="2021/09/14/heros-journey/index.html"
-                              class=""
-                              ><span class="item_outer"
-                                ><span class="item_text">Quote</span></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-5127"
-                            class="menu-item menu-item-type-post_type menu-item-object-post"
-                          >
-                            <a
-                              href="2021/09/14/a-time-travel-tale/index.html"
-                              class=""
-                              ><span class="item_outer"
-                                ><span class="item_text">Video</span></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-5128"
-                            class="menu-item menu-item-type-post_type menu-item-object-post"
-                          >
-                            <a
-                              href="2021/09/14/winners-on-esl-pro/index.html"
-                              class=""
-                              ><span class="item_outer"
-                                ><span class="item_text">Audio</span></span
-                              ></a
-                            >
-                          </li>
-                        </ul>
+                        <a [routerLink]="['/showPacks']" class="nav-link">
+                          <span class="item_outer"><span class="item_text">Show Packs</span></span>
+                        </a>
                       </li>
                     </ul>
                   </div>
                 </div>
               </li>
               <li
-                id="nav-menu-item-3091"
-                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children has_sub narrow"
+                routerLinkActive="edgtf-active-item"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="menu-item has_sub narrow"
               >
-                <a href="#" class=""
-                  ><span class="item_outer"
-                    ><span class="item_text">Shop</span
-                    ><i class="edgtf-menu-arrow fa fa-angle-down"></i></span
-                ></a>
-                <div class="second">
-                  <div class="inner">
-                    <ul>
-                      <li
-                        id="nav-menu-item-5129"
-                        class="menu-item menu-item-type-post_type menu-item-object-page"
-                      >
-                        <a href="shop/index.html" class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">Product List</span></span
-                          ></a
-                        >
-                      </li>
-                      <li
-                        id="nav-menu-item-3145"
-                        class="menu-item menu-item-type-post_type menu-item-object-product"
-                      >
-                        <a href="product/dangerzone/index.html" class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">Product Single</span></span
-                          ></a
-                        >
-                      </li>
-                      <li
-                        id="nav-menu-item-3094"
-                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children sub"
-                      >
-                        <a href="#" class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">Shop Layouts</span></span
-                          ></a
-                        >
-                        <ul>
-                          <li
-                            id="nav-menu-item-5131"
-                            class="menu-item menu-item-type-post_type menu-item-object-page"
-                          >
-                            <a href="shop/three-columns/index.html" class=""
-                              ><span class="item_outer"
-                                ><span class="item_text"
-                                  >Three Columns</span
-                                ></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-5133"
-                            class="menu-item menu-item-type-post_type menu-item-object-page"
-                          >
-                            <a href="shop/four-columns/index.html" class=""
-                              ><span class="item_outer"
-                                ><span class="item_text"
-                                  >Four Columns</span
-                                ></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-5134"
-                            class="menu-item menu-item-type-post_type menu-item-object-page"
-                          >
-                            <a href="shop/full-width/index.html" class=""
-                              ><span class="item_outer"
-                                ><span class="item_text">Full Width</span></span
-                              ></a
-                            >
-                          </li>
-                        </ul>
-                      </li>
-                      <li
-                        id="nav-menu-item-3097"
-                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children sub"
-                      >
-                        <a href="#" class=""
-                          ><span class="item_outer"
-                            ><span class="item_text">Shop Pages</span></span
-                          ></a
-                        >
-                        <ul>
-                          <li
-                            id="nav-menu-item-3182"
-                            class="menu-item menu-item-type-post_type menu-item-object-page"
-                          >
-                            <a href="my-account-2/index.html" class=""
-                              ><span class="item_outer"
-                                ><span class="item_text">My Account</span></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-3183"
-                            class="menu-item menu-item-type-post_type menu-item-object-page"
-                          >
-                            <a href="cart-2/index.html" class=""
-                              ><span class="item_outer"
-                                ><span class="item_text">Cart</span></span
-                              ></a
-                            >
-                          </li>
-                          <li
-                            id="nav-menu-item-3181"
-                            class="menu-item menu-item-type-post_type menu-item-object-page"
-                          >
-                            <a href="checkout-2/index.html" class=""
-                              ><span class="item_outer"
-                                ><span class="item_text">Checkout</span></span
-                              ></a
-                            >
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                <a [routerLink]="['/shop']" class="nav-link">
+        <span class="item_outer">
+          <span class="item_text">Shop</span>
+          <i class="edgtf-menu-arrow fa fa-angle-down"></i>
+        </span>
+                </a>
               </li>
               <li
-                id="nav-menu-item-5942"
-                class="menu-item menu-item-type-post_type menu-item-object-page narrow"
+                routerLinkActive="edgtf-active-item"
+                [routerLinkActiveOptions]="{ exact: false }"
+                class="menu-item has_sub narrow"
               >
-                <a href="landing/index.html" class=""
-                  ><span class="item_outer"
-                    ><span class="item_text">Landing</span></span
-                  ></a
-                >
+                <a [routerLink]="['/support']" class="nav-link">
+        <span class="item_outer">
+          <span class="item_text">FAQ</span>
+          <i class="edgtf-menu-arrow fa fa-angle-down"></i>
+        </span>
+                </a>
               </li>
             </ul>
           </nav>

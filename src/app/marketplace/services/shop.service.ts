@@ -52,8 +52,14 @@ export class ShopService {
   }
 
   addUserArticle(userId: number, articleId: number): Observable<any> {
-    const url = `http://localhost:8080/api/articles/${articleId}/user/${userId}`;
+    const url = `${this.BASE_URL_ARTICLE}/user/${articleId}/${userId}`;
     return this.http.post<any>(url, {});
   }
+
+existsByUserIdAndGameId(userId: number, gameId: number): Observable<boolean> {
+  const url = `${this.BASE_URL_ARTICLE}/${userId}/${gameId}`;
+  return this.http.get<boolean>(url);
+}
+
 
 }

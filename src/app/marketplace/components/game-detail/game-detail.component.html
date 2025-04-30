@@ -82,12 +82,14 @@
                   enctype="multipart/form-data"
                 >
 
-                  <a [routerLink]="['/checkout', article.articleId]">
-                    <button type="submit" value="197" class="single_add_to_cart_button button alt">
-
-                      BUY NOW
-                    </button>
+                  <a *ngIf="!isBuyed" [routerLink]="['/checkout', article.articleId]">
+                    <button type="submit" value="197" class="single_add_to_cart_button button alt">BUY NOW</button>
                   </a>
+
+                  <a *ngIf="isBuyed">
+                    <button type="submit" value="197" class="single_add_to_cart_button button alt">PLAY NOW</button>
+                  </a>
+
                 </form>
 
                 <div class="product_meta">
@@ -243,6 +245,7 @@
                   </h2>
 
                   <ol *ngFor="let review of reviews" class="commentlist">
+                    {{ review.user.profilePictureUrl }}
                     <li
                       class="comment even thread-even depth-1"
                       id="li-comment-16"
@@ -270,7 +273,8 @@
                                 class="woocommerce-review__published-date">{{ review.reviewDate | date:'MMMM,d,y hh:mm' }}</time>
                             </span>
                             <div class="custom-select-wrapper">
-                              <select *ngIf="review.user.userId == currentUserId" class="action-select" (change)="onSelectChange($event, review)">
+                              <select *ngIf="review.user.userId == currentUserId" class="action-select"
+                                      (change)="onSelectChange($event, review)">
                                 <option value="" disabled selected></option>
                                 <option value="update">Update</option>
                                 <option value="delete">Delete</option>
@@ -331,7 +335,8 @@
                         ></small
                       ></span
                       >
-                      <h5 *ngIf="!isUplodable" style="color: #ff0e1f">Your review contains inappropriate content and cannot be submitted</h5>
+                      <h5 *ngIf="!isUplodable" style="color: #ff0e1f">Your review contains inappropriate content and
+                        cannot be submitted</h5>
                       <form
                         [formGroup]="reviewForm"
                         (ngSubmit)="onSubmitReview()"

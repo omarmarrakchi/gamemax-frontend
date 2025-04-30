@@ -42,6 +42,8 @@ import { SubscriptionComponent } from './Subscriptions/components/subscription/s
 import { ShowPacksComponent } from './Packs/components/show-packs/show-packs.component';
 import { SinglePackComponent } from './Packs/components/single-pack/single-pack.component';
 import { PaymentSubComponent } from './Subscriptions/components/payment-sub/payment-sub.component';
+import { SingleGameComponent } from './Packs/components/single-game/single-game.component';
+import { GameLobyComponent } from './cloudGaming/game-loby/game-loby.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -83,7 +85,9 @@ const config: SocketIoConfig = {
     SubscriptionComponent,
     ShowPacksComponent,
     SinglePackComponent,
-    PaymentSubComponent
+    PaymentSubComponent,
+    SingleGameComponent,
+    GameLobyComponent
 
   ],
   imports: [

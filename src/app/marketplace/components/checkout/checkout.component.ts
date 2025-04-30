@@ -75,13 +75,14 @@ export class CheckoutComponent implements OnInit {
 
   pay(): void {
     let priceToPay = this.article.price * 1000;
+
+    localStorage.setItem('gameId', this.article.articleId.toString());
+
     this.flouciService.initiatePayment(priceToPay).subscribe({
       next: (response) => {
         console.log('Réponse de l\'API Flouci :', response);
 
-        // Vérifiez si la réponse contient un lien de paiement
         if (response?.result?.link) {
-          // Redirigez l'utilisateur vers le lien de paiement
           window.location.href = response.result.link;
         } else {
           alert('Erreur : Lien de paiement non trouvé dans la réponse.');

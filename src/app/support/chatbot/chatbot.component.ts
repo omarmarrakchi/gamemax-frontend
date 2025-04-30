@@ -1,56 +1,98 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { io, Socket } from 'socket.io-client';
-
-interface Message {
-  sender: 'user' | 'bot';
-  text: string;
-}
+import { Component, ElementRef, ViewChild, AfterViewChecked } from '@angular/core';
+import { ChatBotService } from '../services/chat.service';
 
 @Component({
   selector: 'app-chatbot',
   templateUrl: './chatbot.component.html',
   styleUrls: ['./chatbot.component.css']
 })
-export class ChatbotComponent implements OnInit, OnDestroy {
-  socket!: Socket;
-  messages: Message[] = [];
-  userMessage: string = '';
-  isChatOpen: boolean = false;
+export class ChatbotComponent implements AfterViewChecked {
+  @ViewChild('chatBox') private chatBox!: ElementRef;
 
-  readonly SERVER_URL = 'http://localhost:5000'; // Update this if needed
+  isChatOpen = false;
+  userMessage = '';
+  messages: {
+    sender: 'user' | 'bot';
+    text: string;
+    options?: string[];
+  }[] = [];
+  
+  chatContext = {
+    language: 'English',
+    reclamationInProgress: false
+  };
 
-  ngOnInit(): void {
-    this.socket = io(this.SERVER_URL, { transports: ['websocket'] });
+  constructor(private deepSeek: ChatBotService) {
+    this.initializeChat();
+  }
 
-    this.socket.on('connect', () => {
-      console.log('✅ Connected to chatbot backend');
-    });
+  ngAfterViewChecked() {
+    // This ensures that the scroll happens after Angular checks the view.
+    this.scrollToBottom();
+  }
 
-    this.socket.on('receive_message', (data: { message: string }) => {
-      this.messages.push({ sender: 'bot', text: data.message });
-    });
-
-    this.socket.on('disconnect', () => {
-      console.log('❌ Disconnected from chatbot backend');
+  initializeChat() {
+    this.messages.push({
+      sender: 'bot',
+      text: 'Welcome to GameMax Support! How can I help you today?',
+      options: [
+        'File a reclamation',
+        'Troubleshoot issue',
+        'Ask about features'
+      ]
     });
   }
 
-  sendMessage(): void {
-    const message = this.userMessage.trim();
-    if (!message) return;
+  toggleChat() {
+    this.isChatOpen = !this.isChatOpen;
+    if (this.isChatOpen) {
+      setTimeout(() => this.scrollToBottom(), 100);
+    }
+  }
 
-    this.messages.push({ sender: 'user', text: message });
-    this.socket.emit('send_message', { message });
+  sendMessage() {
+    if (!this.userMessage.trim()) return;
+
+    this.messages.push({
+      sender: 'user',
+      text: this.userMessage
+    });
+
+    this.deepSeek.getChatResponse(this.userMessage, this.messages).subscribe(response => {
+      const options = this.extractOptions(response);
+      this.messages.push({
+        sender: 'bot',
+        text: response,
+        options: options.length ? options : undefined
+      });
+      // Scroll after receiving bot response
+    });
+
     this.userMessage = '';
   }
 
-  toggleChat(): void {
-    this.isChatOpen = !this.isChatOpen;
+  onOptionClick(option: string) {
+    this.userMessage = option;
+    this.sendMessage();
   }
 
-  ngOnDestroy(): void {
-    if (this.socket) {
-      this.socket.disconnect();
+  private extractOptions(text: string): string[] {
+    const optionRegex = /\n\d\)\s*(.+)/g;
+    const options = [];
+    let match;
+    
+    while ((match = optionRegex.exec(text)) !== null) {
+      options.push(match[1]);
+    }
+    
+    return options.slice(0, 3); // Return max 3 options
+  }
+
+  private scrollToBottom() {
+    try {
+      this.chatBox.nativeElement.scrollTop = this.chatBox.nativeElement.scrollHeight;
+    } catch (err) { 
+      console.error("Error scrolling to bottom: ", err); 
     }
   }
 }

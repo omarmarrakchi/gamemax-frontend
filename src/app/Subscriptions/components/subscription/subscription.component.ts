@@ -1,23 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SubscriptionService } from '../../services/subscription.service';
 import { Subscription } from '../../models/subscription';
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
+import {AuthenticationService} from "../../../user/services/login/authentification.service";
 
 @Component({
   selector: 'app-subscription',
   templateUrl: './subscription.component.html',
   styleUrls: ['./subscription.component.css']
 })
-export class SubscriptionComponent {
+export class SubscriptionComponent implements OnInit {
+
   message: string = '';
   error: string = '';
-  userId: number = 1;
+  userId: number = 4;
+  hasSubscription: boolean = false;
 
-  constructor(private subscriptionService: SubscriptionService,  private router: Router
-  ) {
+  formattedDates: {
+    day: number;
+    month: number;
+    year: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+  }[] = [];
+
+  constructor(
+    private subscriptionService: SubscriptionService,
+    private authenticationService: AuthenticationService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.userId = this.authenticationService.currentUserValue?.userId;
+    console.log(this.userId);
+    this.checkUser(this.userId);
 
   }
-  buyNow(subscriptionType: string) {
+
+  buyNow(subscriptionType: string): void {
     const startDate = new Date();
     const endDate = new Date();
     endDate.setDate(startDate.getDate() + 30);
@@ -26,19 +47,15 @@ export class SubscriptionComponent {
       userId: this.userId,
       startingDate: startDate.toISOString(),
       expirationDate: endDate.toISOString(),
-      subscriptionType: subscriptionType  // Utilisation dynamique du type
+      subscriptionType
     };
-
-    console.log("Subscription Data Sent:", newSubscription);
 
     this.subscriptionService.saveSubscription(newSubscription).subscribe({
       next: (response) => {
         this.message = 'Subscription created successfully!';
         this.error = '';
         console.log(this.message, response);
-        this.router.navigate(['/payment']);
 
-        // ✅ Cache le message après 3 secondes
         setTimeout(() => {
           this.message = '';
           this.router.navigate(['/payment']);
@@ -49,7 +66,6 @@ export class SubscriptionComponent {
         this.message = '';
         console.error(this.error, err);
 
-        // ✅ Cache l'erreur après 3 secondes
         setTimeout(() => {
           this.error = '';
           this.router.navigate(['/payment']);
@@ -58,4 +74,29 @@ export class SubscriptionComponent {
     });
   }
 
+  checkUser(userId: number): void {
+    this.subscriptionService.getSubscriptionsUser(userId).subscribe({
+      next: (response) => {
+        if (response && response.length > 0) {
+          this.hasSubscription = true;
+          this.formattedDates = response.map(item => {
+            const date = new Date(item.expirationDate);
+            return {
+              day: date.getDate(),
+              month: date.getMonth() + 1,
+              year: date.getFullYear(),
+              hours: date.getHours(),
+              minutes: date.getMinutes(),
+              seconds: date.getSeconds()
+            };
+          });
+        } else {
+          this.hasSubscription = false;
+        }
+      },
+      error: () => {
+        this.hasSubscription = false;
+      }
+    });
+  }
 }

@@ -10,6 +10,7 @@ import {environment} from "../../environments/environment";
 })
 export class SubscriptionService {
   private apiUrl = `${environment.apiUrl}/subscriptions`;
+  private apiUrl_ = `${environment.apiUrl}/packs`;
 
   constructor(private http: HttpClient) { }
 
@@ -21,6 +22,13 @@ export class SubscriptionService {
   // Get all subscriptions
   getSubscriptions(): Observable<Subscription[]> {
     return this.http.get<Subscription[]>(this.apiUrl);
+  }
+  getSubscriptionsUser(idUser:number): Observable<any[]> {
+    return this.http.get<Subscription[]>(`${this.apiUrl}/userSub/${idUser}`);
+  }
+
+  getPacksUser(idSub:number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl_}/by-plan/${idSub}`);
   }
 
   // Get subscription by ID
